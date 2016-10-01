@@ -1,481 +1,185 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("features/Calculadora.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("features/BuscaEndereco.feature");
 formatter.feature({
   "line": 1,
-  "name": "Calculator",
-  "description": "As a user\nI want to use a basic calculator\nSo that I dont need to calculate myself",
-  "id": "calculator",
+  "name": "BuscaEndereco",
+  "description": "Como cliente\nDesejo consultar um endereço a partir do CEP",
+  "id": "buscaendereco",
   "keyword": "Feature"
 });
 formatter.before({
-  "duration": 3008832,
+  "duration": 1513205,
+  "status": "passed"
+});
+formatter.before({
+  "duration": 863733,
   "status": "passed"
 });
 formatter.scenario({
   "line": 6,
-  "name": "Sum two numbers",
+  "name": "Consultar um endereco valido",
   "description": "",
-  "id": "calculator;sum-two-numbers",
+  "id": "buscaendereco;consultar-um-endereco-valido",
   "type": "scenario",
   "keyword": "Scenario"
 });
 formatter.step({
   "line": 7,
-  "name": "I have a calculator",
+  "name": "Eu possuo um CEP correto com 8 digitos",
   "keyword": "Given "
 });
 formatter.step({
   "line": 8,
-  "name": "I sum 3 with 3",
+  "name": "Eu informo o CEP {13083872}",
   "keyword": "When "
 });
 formatter.step({
   "line": 9,
-  "name": "the result should be 6",
+  "name": "O resultado deve ser o endereço \"Cidade Universitária Zeferino Vaz, Barão Geraldo - Campinas - SP\"",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "CalculadoraSteps.i_have_a_calculator()"
+  "location": "BuscaEnderecoSteps.possuoCEPCorreto(String)"
 });
 formatter.result({
-  "duration": 79884747,
-  "status": "passed"
+  "duration": 68583889,
+  "error_message": "cucumber.runtime.CucumberException: Arity mismatch: Step Definition \u0027br.unicamp.exemplo.steps.BuscaEnderecoSteps.possuoCEPCorreto(String) in file:/home/inf300/espsoft58/workspace/VerificacaoValidacaoLab2/target/test-classes/\u0027 with pattern [^Eu possuo um CEP correto com 8 digitos$] is declared with 1 parameters. However, the gherkin step has 0 arguments []. \nStep: Given Eu possuo um CEP correto com 8 digitos\n\tat cucumber.runtime.StepDefinitionMatch.arityMismatch(StepDefinitionMatch.java:102)\n\tat cucumber.runtime.StepDefinitionMatch.transformedArgs(StepDefinitionMatch.java:60)\n\tat cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)\n\tat cucumber.runtime.Runtime.runStep(Runtime.java:300)\n\tat cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)\n\tat cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)\n\tat cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)\n\tat cucumber.runtime.junit.ExecutionUnitRunner.run(ExecutionUnitRunner.java:102)\n\tat cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:63)\n\tat cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:18)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:70)\n\tat cucumber.api.junit.Cucumber.runChild(Cucumber.java:95)\n\tat cucumber.api.junit.Cucumber.runChild(Cucumber.java:38)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat cucumber.api.junit.Cucumber.run(Cucumber.java:100)\n\tat org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)\n\tat org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)\n",
+  "status": "failed"
 });
-formatter.match({
-  "arguments": [
-    {
-      "val": "3",
-      "offset": 6
-    },
-    {
-      "val": "3",
-      "offset": 13
-    }
-  ],
-  "location": "CalculadoraSteps.i_sum_with(int,int)"
-});
+formatter.match({});
 formatter.result({
-  "duration": 1187556,
-  "status": "passed"
+  "status": "undefined"
 });
-formatter.match({
-  "arguments": [
-    {
-      "val": "6",
-      "offset": 21
-    }
-  ],
-  "location": "CalculadoraSteps.the_result_should_be(int)"
-});
+formatter.match({});
 formatter.result({
-  "duration": 101695,
+  "status": "undefined"
+});
+formatter.before({
+  "duration": 21570,
   "status": "passed"
 });
-formatter.scenarioOutline({
+formatter.before({
+  "duration": 17414,
+  "status": "passed"
+});
+formatter.scenario({
   "line": 11,
-  "name": "Multiply two numbers",
+  "name": "Consultar um endereco invalido",
   "description": "",
-  "id": "calculator;multiply-two-numbers",
-  "type": "scenario_outline",
-  "keyword": "Scenario Outline"
-});
-formatter.step({
-  "line": 12,
-  "name": "I have a calculator",
-  "keyword": "Given "
-});
-formatter.step({
-  "line": 13,
-  "name": "I multiply \u003cfirstNumber\u003e with \u003csecondNumber\u003e",
-  "keyword": "When "
-});
-formatter.step({
-  "line": 14,
-  "name": "the result should be \u003cresult\u003e",
-  "keyword": "Then "
-});
-formatter.examples({
-  "line": 16,
-  "name": "",
-  "description": "",
-  "id": "calculator;multiply-two-numbers;",
-  "rows": [
-    {
-      "cells": [
-        "firstNumber",
-        "secondNumber",
-        "result"
-      ],
-      "line": 17,
-      "id": "calculator;multiply-two-numbers;;1"
-    },
-    {
-      "cells": [
-        "1",
-        "0",
-        "0"
-      ],
-      "line": 18,
-      "id": "calculator;multiply-two-numbers;;2"
-    },
-    {
-      "cells": [
-        "2",
-        "2",
-        "4"
-      ],
-      "line": 19,
-      "id": "calculator;multiply-two-numbers;;3"
-    },
-    {
-      "cells": [
-        "3",
-        "10",
-        "30"
-      ],
-      "line": 20,
-      "id": "calculator;multiply-two-numbers;;4"
-    }
-  ],
-  "keyword": "Examples"
-});
-formatter.before({
-  "duration": 33767,
-  "status": "passed"
-});
-formatter.scenario({
-  "line": 18,
-  "name": "Multiply two numbers",
-  "description": "",
-  "id": "calculator;multiply-two-numbers;;2",
-  "type": "scenario",
-  "keyword": "Scenario Outline"
-});
-formatter.step({
-  "line": 12,
-  "name": "I have a calculator",
-  "keyword": "Given "
-});
-formatter.step({
-  "line": 13,
-  "name": "I multiply 1 with 0",
-  "matchedColumns": [
-    0,
-    1
-  ],
-  "keyword": "When "
-});
-formatter.step({
-  "line": 14,
-  "name": "the result should be 0",
-  "matchedColumns": [
-    2
-  ],
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "CalculadoraSteps.i_have_a_calculator()"
-});
-formatter.result({
-  "duration": 33234,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "1",
-      "offset": 11
-    },
-    {
-      "val": "0",
-      "offset": 18
-    }
-  ],
-  "location": "CalculadoraSteps.i_mult_with(int,int)"
-});
-formatter.result({
-  "duration": 134134,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "0",
-      "offset": 21
-    }
-  ],
-  "location": "CalculadoraSteps.the_result_should_be(int)"
-});
-formatter.result({
-  "duration": 58007,
-  "status": "passed"
-});
-formatter.before({
-  "duration": 23310,
-  "status": "passed"
-});
-formatter.scenario({
-  "line": 19,
-  "name": "Multiply two numbers",
-  "description": "",
-  "id": "calculator;multiply-two-numbers;;3",
-  "type": "scenario",
-  "keyword": "Scenario Outline"
-});
-formatter.step({
-  "line": 12,
-  "name": "I have a calculator",
-  "keyword": "Given "
-});
-formatter.step({
-  "line": 13,
-  "name": "I multiply 2 with 2",
-  "matchedColumns": [
-    0,
-    1
-  ],
-  "keyword": "When "
-});
-formatter.step({
-  "line": 14,
-  "name": "the result should be 4",
-  "matchedColumns": [
-    2
-  ],
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "CalculadoraSteps.i_have_a_calculator()"
-});
-formatter.result({
-  "duration": 15850,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "2",
-      "offset": 11
-    },
-    {
-      "val": "2",
-      "offset": 18
-    }
-  ],
-  "location": "CalculadoraSteps.i_mult_with(int,int)"
-});
-formatter.result({
-  "duration": 97731,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "4",
-      "offset": 21
-    }
-  ],
-  "location": "CalculadoraSteps.the_result_should_be(int)"
-});
-formatter.result({
-  "duration": 61022,
-  "status": "passed"
-});
-formatter.before({
-  "duration": 30093,
-  "status": "passed"
-});
-formatter.scenario({
-  "line": 20,
-  "name": "Multiply two numbers",
-  "description": "",
-  "id": "calculator;multiply-two-numbers;;4",
-  "type": "scenario",
-  "keyword": "Scenario Outline"
-});
-formatter.step({
-  "line": 12,
-  "name": "I have a calculator",
-  "keyword": "Given "
-});
-formatter.step({
-  "line": 13,
-  "name": "I multiply 3 with 10",
-  "matchedColumns": [
-    0,
-    1
-  ],
-  "keyword": "When "
-});
-formatter.step({
-  "line": 14,
-  "name": "the result should be 30",
-  "matchedColumns": [
-    2
-  ],
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "CalculadoraSteps.i_have_a_calculator()"
-});
-formatter.result({
-  "duration": 16846,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "3",
-      "offset": 11
-    },
-    {
-      "val": "10",
-      "offset": 18
-    }
-  ],
-  "location": "CalculadoraSteps.i_mult_with(int,int)"
-});
-formatter.result({
-  "duration": 101996,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "30",
-      "offset": 21
-    }
-  ],
-  "location": "CalculadoraSteps.the_result_should_be(int)"
-});
-formatter.result({
-  "duration": 62694,
-  "status": "passed"
-});
-formatter.before({
-  "duration": 19750,
-  "status": "passed"
-});
-formatter.scenario({
-  "line": 22,
-  "name": "Division by zero",
-  "description": "",
-  "id": "calculator;division-by-zero",
+  "id": "buscaendereco;consultar-um-endereco-invalido",
   "type": "scenario",
   "keyword": "Scenario"
+});
+formatter.step({
+  "line": 12,
+  "name": "Eu possuo um CEP incorreto com 8 digitos",
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 13,
+  "name": "Eu informo o CEP {99999999}",
+  "keyword": "When "
+});
+formatter.step({
+  "line": 14,
+  "name": "O retorno contera um valor de \"erro\" igual a \"true\".",
+  "keyword": "Then "
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.before({
+  "duration": 20438,
+  "status": "passed"
+});
+formatter.before({
+  "duration": 32621,
+  "status": "passed"
+});
+formatter.scenario({
+  "line": 16,
+  "name": "Consultar um endereco com CEP invalido.",
+  "description": "",
+  "id": "buscaendereco;consultar-um-endereco-com-cep-invalido.",
+  "type": "scenario",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "line": 17,
+  "name": "Eu possuo um CEP incorreto com mais de 8 digitos",
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 18,
+  "name": "Eu informo o CEP {123456789}",
+  "keyword": "When "
+});
+formatter.step({
+  "line": 19,
+  "name": "O retorno da consulta será um 400 (Bad Request).",
+  "keyword": "Then "
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.before({
+  "duration": 19813,
+  "status": "passed"
+});
+formatter.before({
+  "duration": 16455,
+  "status": "passed"
+});
+formatter.scenario({
+  "line": 21,
+  "name": "Consultar um endereco com CEP invalido.",
+  "description": "",
+  "id": "buscaendereco;consultar-um-endereco-com-cep-invalido.",
+  "type": "scenario",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "line": 22,
+  "name": "Eu possuo um CEP incorreto com caracteres invalidos.",
+  "keyword": "Given "
 });
 formatter.step({
   "line": 23,
-  "name": "I have a calculator",
-  "keyword": "Given "
+  "name": "Eu informo o CEP {1 A*n258}",
+  "keyword": "When "
 });
 formatter.step({
   "line": 24,
-  "name": "I divide 7 with 0",
-  "keyword": "When "
-});
-formatter.step({
-  "line": 25,
-  "name": "should show an error with a message:",
-  "keyword": "Then ",
-  "doc_string": {
-    "content_type": "",
-    "line": 26,
-    "value": "/ by zero"
-  }
-});
-formatter.match({
-  "location": "CalculadoraSteps.i_have_a_calculator()"
-});
-formatter.result({
-  "duration": 17690,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "7",
-      "offset": 9
-    },
-    {
-      "val": "0",
-      "offset": 16
-    }
-  ],
-  "location": "CalculadoraSteps.i_div_with(int,int)"
-});
-formatter.result({
-  "duration": 124718,
-  "status": "passed"
-});
-formatter.match({
-  "location": "CalculadoraSteps.should_show_an_error(String)"
-});
-formatter.result({
-  "duration": 26648694,
-  "status": "passed"
-});
-formatter.before({
-  "duration": 26125,
-  "status": "passed"
-});
-formatter.scenario({
-  "line": 30,
-  "name": "Divide two numbers",
-  "description": "",
-  "id": "calculator;divide-two-numbers",
-  "type": "scenario",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "line": 31,
-  "name": "I have a calculator",
-  "keyword": "Given "
-});
-formatter.step({
-  "line": 32,
-  "name": "I divide 9 with 3",
-  "keyword": "When "
-});
-formatter.step({
-  "line": 33,
-  "name": "the result should be 3",
+  "name": "O retorno da consulta será um 400 (Bad Request).",
   "keyword": "Then "
 });
-formatter.match({
-  "location": "CalculadoraSteps.i_have_a_calculator()"
-});
+formatter.match({});
 formatter.result({
-  "duration": 19323,
-  "status": "passed"
+  "status": "undefined"
 });
-formatter.match({
-  "arguments": [
-    {
-      "val": "9",
-      "offset": 9
-    },
-    {
-      "val": "3",
-      "offset": 16
-    }
-  ],
-  "location": "CalculadoraSteps.i_div_with(int,int)"
-});
+formatter.match({});
 formatter.result({
-  "duration": 101114,
-  "status": "passed"
+  "status": "undefined"
 });
-formatter.match({
-  "arguments": [
-    {
-      "val": "3",
-      "offset": 21
-    }
-  ],
-  "location": "CalculadoraSteps.the_result_should_be(int)"
-});
+formatter.match({});
 formatter.result({
-  "duration": 50558,
-  "status": "passed"
+  "status": "undefined"
 });
 });
