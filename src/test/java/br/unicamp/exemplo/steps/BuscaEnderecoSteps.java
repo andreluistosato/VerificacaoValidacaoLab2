@@ -21,7 +21,7 @@ public class BuscaEnderecoSteps{
     	throwable = null;
     }
     
-    @Given("^Eu possuo um CEP correto com 8 digitos$")
+    @Given("^Eu possuo um CEP correto com (\\d+) digitos$")
     public void possuoCEPCorreto(String cep){
     	buscaEndereco.busca(cep);
     }

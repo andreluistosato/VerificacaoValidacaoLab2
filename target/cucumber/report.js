@@ -7,11 +7,11 @@ formatter.feature({
   "keyword": "Feature"
 });
 formatter.before({
-  "duration": 1513205,
+  "duration": 834601,
   "status": "passed"
 });
 formatter.before({
-  "duration": 863733,
+  "duration": 424183,
   "status": "passed"
 });
 formatter.scenario({
@@ -38,12 +38,17 @@ formatter.step({
   "keyword": "Then "
 });
 formatter.match({
+  "arguments": [
+    {
+      "val": "8",
+      "offset": 29
+    }
+  ],
   "location": "BuscaEnderecoSteps.possuoCEPCorreto(String)"
 });
 formatter.result({
-  "duration": 68583889,
-  "error_message": "cucumber.runtime.CucumberException: Arity mismatch: Step Definition \u0027br.unicamp.exemplo.steps.BuscaEnderecoSteps.possuoCEPCorreto(String) in file:/home/inf300/espsoft58/workspace/VerificacaoValidacaoLab2/target/test-classes/\u0027 with pattern [^Eu possuo um CEP correto com 8 digitos$] is declared with 1 parameters. However, the gherkin step has 0 arguments []. \nStep: Given Eu possuo um CEP correto com 8 digitos\n\tat cucumber.runtime.StepDefinitionMatch.arityMismatch(StepDefinitionMatch.java:102)\n\tat cucumber.runtime.StepDefinitionMatch.transformedArgs(StepDefinitionMatch.java:60)\n\tat cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)\n\tat cucumber.runtime.Runtime.runStep(Runtime.java:300)\n\tat cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)\n\tat cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)\n\tat cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)\n\tat cucumber.runtime.junit.ExecutionUnitRunner.run(ExecutionUnitRunner.java:102)\n\tat cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:63)\n\tat cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:18)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:70)\n\tat cucumber.api.junit.Cucumber.runChild(Cucumber.java:95)\n\tat cucumber.api.junit.Cucumber.runChild(Cucumber.java:38)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat cucumber.api.junit.Cucumber.run(Cucumber.java:100)\n\tat org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)\n\tat org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)\n\tat org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)\n",
-  "status": "failed"
+  "duration": 242459813,
+  "status": "passed"
 });
 formatter.match({});
 formatter.result({
@@ -54,11 +59,11 @@ formatter.result({
   "status": "undefined"
 });
 formatter.before({
-  "duration": 21570,
+  "duration": 43230,
   "status": "passed"
 });
 formatter.before({
-  "duration": 17414,
+  "duration": 34734,
   "status": "passed"
 });
 formatter.scenario({
@@ -97,11 +102,11 @@ formatter.result({
   "status": "undefined"
 });
 formatter.before({
-  "duration": 20438,
+  "duration": 33962,
   "status": "passed"
 });
 formatter.before({
-  "duration": 32621,
+  "duration": 28976,
   "status": "passed"
 });
 formatter.scenario({
@@ -140,11 +145,11 @@ formatter.result({
   "status": "undefined"
 });
 formatter.before({
-  "duration": 19813,
+  "duration": 39394,
   "status": "passed"
 });
 formatter.before({
-  "duration": 16455,
+  "duration": 33195,
   "status": "passed"
 });
 formatter.scenario({
