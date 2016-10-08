@@ -1,1 +1,0 @@
-INDEX VERSION 1.129+/home/andrebonon/Projects/espsoft/INF321/VerificacaoValidacaoLab2/.metadata/.plugins/org.eclipse.jdt.core
