@@ -2,16 +2,16 @@ $(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.
 formatter.feature({
   "line": 1,
   "name": "BuscaEndereco",
-  "description": "Como cliente\nDesejo consultar um endereço a partir do CEP",
+  "description": "Como cliente\r\nDesejo consultar um endereço a partir do CEP",
   "id": "buscaendereco",
   "keyword": "Feature"
 });
 formatter.before({
-  "duration": 834601,
+  "duration": 1156804,
   "status": "passed"
 });
 formatter.before({
-  "duration": 424183,
+  "duration": 432358,
   "status": "passed"
 });
 formatter.scenario({
@@ -47,7 +47,7 @@ formatter.match({
   "location": "BuscaEnderecoSteps.possuoCEPCorreto(String)"
 });
 formatter.result({
-  "duration": 242459813,
+  "duration": 259197661,
   "status": "passed"
 });
 formatter.match({});
@@ -59,11 +59,11 @@ formatter.result({
   "status": "undefined"
 });
 formatter.before({
-  "duration": 43230,
+  "duration": 51746,
   "status": "passed"
 });
 formatter.before({
-  "duration": 34734,
+  "duration": 49180,
   "status": "passed"
 });
 formatter.scenario({
@@ -102,11 +102,11 @@ formatter.result({
   "status": "undefined"
 });
 formatter.before({
-  "duration": 33962,
+  "duration": 31218,
   "status": "passed"
 });
 formatter.before({
-  "duration": 28976,
+  "duration": 31647,
   "status": "passed"
 });
 formatter.scenario({
@@ -145,11 +145,11 @@ formatter.result({
   "status": "undefined"
 });
 formatter.before({
-  "duration": 39394,
+  "duration": 63293,
   "status": "passed"
 });
 formatter.before({
-  "duration": 33195,
+  "duration": 41910,
   "status": "passed"
 });
 formatter.scenario({
