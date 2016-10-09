@@ -12,7 +12,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 import static com.github.tomakehurst.wiremock.client.WireMock.verify;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -57,7 +57,7 @@ public class WireMockExemploTest {
 
 	    String status = consultaStatusService.consultStatus("123");
 
-	    assertNotNull(status);
+	    assertEquals("01", status);
 
 //	    verify(postRequestedFor(urlMatching("/my/resource/[a-z0-9]+"))
 //	            .withRequestBody(matching(".*<message>1234</message>.*"))

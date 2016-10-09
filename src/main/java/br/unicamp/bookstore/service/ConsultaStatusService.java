@@ -7,6 +7,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import br.unicamp.bookstore.Configuration;
 
 public class ConsultaStatusService {
@@ -18,23 +32,21 @@ public class ConsultaStatusService {
 			URLConnection connection = openConnection(codigo);
 			String status = getStatusFromResponse(connection);
 			return status;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	private String getStatusFromResponse(URLConnection connection) throws IOException {
-		StringBuilder builder = new StringBuilder();
-		DataInputStream inStream = new DataInputStream(connection.getInputStream());
-		String inputLine;
-		while ((inputLine = inStream.readLine()) != null) {
-			builder.append(inputLine);
-		}
-		inStream.close();
-		return builder.toString();
+	private String getStatusFromResponse(URLConnection connection) throws Exception {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(connection.getInputStream());
+		
+		XPath xpath = XPathFactory.newInstance().newXPath();
+	    XPathExpression expr = xpath.compile("/sroxml/objeto/evento[1]/status");
+	    
+	    return (String) expr.evaluate(document, XPathConstants.STRING);
 	}
 
 	private URLConnection openConnection(String codigo) throws MalformedURLException, IOException {
@@ -44,7 +56,7 @@ public class ConsultaStatusService {
 		connection.setUseCaches(false);
 		connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 		connection.setAllowUserInteraction(false);
-		
+
 		PrintStream outStream = new PrintStream(connection.getOutputStream());
 		outStream.println("usuario=ECT&senha=SRO&tipo=L&resultado=T&objetos=" + codigo);
 		outStream.close();
