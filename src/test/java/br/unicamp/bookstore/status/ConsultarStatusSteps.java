@@ -42,28 +42,26 @@ public class ConsultarStatusSteps {
 
 	@Before
 	public void setup() {
-		wireMockServer.start();
+		if (!wireMockServer.isRunning()) {
+			wireMockServer.start();
+		}
 		MockitoAnnotations.initMocks(this);
-		Mockito.when(configuration.getStatusEntregaUrl()).thenReturn("http://localhost:8080/sro_bin/sroii_xml.eventos");
+		Mockito.when(configuration.getStatusEntregaUrl())
+				.thenReturn("http://localhost:8080/sro_bin/sroii_xml.eventos");
 	}
 
-	@After
-	public void tearDownTest() {
-		wireMockServer.stop();
-	}
-	
 	@Given("^Eu possuo um codigo de rastreamento de uma compra efetuado no BookStore$")
 	public void eu_possuo_um_codigo_de_rastreamento_de_uma_compra_efetuado_no_BookStore() throws Throwable {
 		wireMockServer.stubFor(post(urlEqualTo("/sro_bin/sroii_xml.eventos"))
 				.willReturn(aResponse().withStatus(200)
-				.withHeader("Content-Type", "text/xml")
-				.withBodyFile("resultado-pesquisa-status.xml")));
+						.withHeader("Content-Type", "text/xml")
+						.withBodyFile("resultado-pesquisa-status.xml")));
 	}
 
 	@When("^O cliente informar o (\\d+) de rastreamento$")
 	public void o_cliente_informar_o_codigo_de_rastreamento(String codigo) throws Throwable {
 		status = consultaStatusService.consultStatus(codigo);
-		
+
 		wireMockServer.verify(postRequestedFor(urlMatching("/sro_bin/sroii_xml.eventos"))
 				.withRequestBody(containing("objetos=" + codigo)));
 	}

@@ -15,6 +15,20 @@ import org.w3c.dom.Document;
 
 public class RemoteService {
 
+	public Document getAndParseXml(String endpointUrl) {
+		try {
+			URL url = new URL(endpointUrl);
+			URLConnection connection = url.openConnection();
+			connection.setUseCaches(false);
+			connection.setAllowUserInteraction(false);
+
+			return parseResponse(connection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public Document postAndParseXml(String endpointUrl, String body) {
 		try {
 			URLConnection connection = openConnection(endpointUrl, body);
@@ -68,4 +82,5 @@ public class RemoteService {
 		outStream.close();
 		return connection;
 	}
+
 }
