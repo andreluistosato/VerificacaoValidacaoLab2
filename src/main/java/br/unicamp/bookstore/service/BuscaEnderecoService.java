@@ -1,8 +1,7 @@
 package br.unicamp.bookstore.service;
 
-import org.w3c.dom.Document;
-
 import br.unicamp.bookstore.Configuracao;
+import br.unicamp.bookstore.model.Endereco;
 
 public class BuscaEnderecoService {
 
@@ -13,8 +12,9 @@ public class BuscaEnderecoService {
 				configuracao.getBuscarEnderecoUrl(),
 				cep);
 		
-		Document document = new RemoteService().getAndParseXml(url);
-		return null;
+		Endereco endereco = new RemoteService().getAndParseXml(url, Endereco.class);
+		
+		return String.format("%s, %s", endereco.getBairro(), endereco.getLogradouro());
 	}
 	
 	

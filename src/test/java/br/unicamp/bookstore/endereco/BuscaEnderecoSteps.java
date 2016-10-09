@@ -2,6 +2,7 @@ package br.unicamp.bookstore.endereco;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 
@@ -50,7 +51,7 @@ public class BuscaEnderecoSteps {
 
 	@Given("^Eu possuo um CEP correto com (\\d+) digitos$")
 	public void eu_possuo_um_CEP_correto_com_digitos(int arg1) throws Throwable {
-		wireMockServer.stubFor(post(urlMatching("/ws/%s"))
+		wireMockServer.stubFor(get(urlMatching("/ws/.*"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-pesquisa-BuscaEndereco.xml")));

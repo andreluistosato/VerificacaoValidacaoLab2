@@ -1,6 +1,5 @@
 package br.unicamp.bookstore.service;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
@@ -8,14 +7,33 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class RemoteService {
 
-	public Document getAndParseXml(String endpointUrl) {
+	public <T> T getAndParseXml(String endpointUrl, Class<T> xmlClass) {
+		Document document = getAndParseXml(endpointUrl);
+		try {
+			Element root = document.getDocumentElement();
+
+			JAXBContext context = JAXBContext.newInstance(xmlClass);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			JAXBElement<T> loader = unmarshaller.unmarshal(root, xmlClass);
+			return loader.getValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private Document getAndParseXml(String endpointUrl) {
 		try {
 			URL url = new URL(endpointUrl);
 			URLConnection connection = url.openConnection();
