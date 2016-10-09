@@ -1,9 +1,5 @@
 package br.unicamp.bookstore.endereco;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import org.assertj.core.api.Assertions;
-
 import br.unicamp.bookstore.service.BuscaEnderecoService;
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
@@ -14,12 +10,10 @@ import cucumber.api.java.en.When;
 public class BuscaEnderecoSteps{
 	
     private BuscaEnderecoService buscaEndereco;
-    private Throwable throwable;
     
     @Before
     public void setUp() {
     	buscaEndereco = new BuscaEnderecoService();
-    	throwable = null;
     }
     
     @Given("^Eu possuo um CEP correto com (\\d+) digitos$")
