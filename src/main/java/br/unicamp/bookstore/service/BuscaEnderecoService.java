@@ -1,6 +1,6 @@
 package br.unicamp.bookstore.service;
 
-import br.unicamp.bookstore.Configuration;
+import br.unicamp.bookstore.Configuracao;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -10,7 +10,7 @@ import java.net.URLConnection;
 
 public class BuscaEnderecoService {
 
-	private Configuration configuration;
+	private Configuracao configuration;
 	
 	public String buscar(String cep) {
 		try {
@@ -37,7 +37,7 @@ public class BuscaEnderecoService {
 	}
 	
 	private URLConnection openConnection(String codigo) throws MalformedURLException, IOException {
-		URL url = new URL(configuration.getUrlEndpoint() + "/sro_bin/sroii_xml.eventos");
+		URL url = new URL(configuration.getStatusEntregaUrl() + "/sro_bin/sroii_xml.eventos");
 		URLConnection connection = url.openConnection();
 		connection.setDoOutput(true);
 		connection.setUseCaches(false);

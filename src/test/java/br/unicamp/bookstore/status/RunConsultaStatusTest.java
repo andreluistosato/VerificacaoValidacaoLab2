@@ -11,7 +11,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = { "pretty", "html:target/cucumber" },
-        glue = "br.unicamp.bookstore",
+        glue = "br.unicamp.bookstore.status",
         features = "classpath:features/ConsultarStatus.feature"
 )
 public class RunConsultaStatusTest {
