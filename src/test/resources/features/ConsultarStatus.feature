@@ -4,5 +4,5 @@ Feature: ConsultarStatusEntrega
 
 Scenario: O comprador consulta o status de entrega de sua compra 
 Given Eu possuo um codigo de rastreamento de uma compra efetuado no BookStore 
-When O cliente informar o <codigo> de rastreamento
-Then O cliente recebera o <status> da entrega
+When O cliente informar o 123 de rastreamento
+Then O cliente recebera o 01 da entrega
