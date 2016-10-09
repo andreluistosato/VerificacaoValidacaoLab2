@@ -12,7 +12,7 @@ public class BuscaEnderecoService {
 
 	private Configuration configuration;
 	
-	public String buscaEndereco(String cep) {
+	public String buscar(String cep) {
 		try {
 			URLConnection connection = openConnection(cep);
 			String endereco = getStatusFromResponse(connection);
