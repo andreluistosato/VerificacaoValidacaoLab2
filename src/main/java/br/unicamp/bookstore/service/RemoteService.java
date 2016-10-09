@@ -33,34 +33,20 @@ public class RemoteService {
 		}
 	}
 	
-	private Document getAndParseXml(String endpointUrl) {
+	public Document getAndParseXml(String endpointUrl) {
 		try {
-			URL url = new URL(endpointUrl);
-			URLConnection connection = url.openConnection();
-			connection.setUseCaches(false);
-			connection.setAllowUserInteraction(false);
-
+			URLConnection connection = openConnection(endpointUrl);
 			return parseResponse(connection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
+	
 	public Document postAndParseXml(String endpointUrl, String body) {
 		try {
 			URLConnection connection = openConnection(endpointUrl, body);
 			return parseResponse(connection);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public String postAndReturnBody(String endpointUrl, String body) {
-		try {
-			URLConnection connection = openConnection(endpointUrl, body);
-			return readResponse(connection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,20 +59,15 @@ public class RemoteService {
 		return builder.parse(connection.getInputStream());
 	}
 
-	private String readResponse(URLConnection connection) throws Exception {
-		Scanner scanner = new Scanner(connection.getInputStream());
-		try {
-			StringBuilder builder = new StringBuilder();
-			while (scanner.hasNext()) {
-				builder.append(scanner.nextLine());
-				builder.append("\n");
-			}
-			return builder.toString();
-		} finally {
-			scanner.close();
-		}
-	}
+	private URLConnection openConnection(String endpointUrl) throws MalformedURLException, IOException {
+		URL url = new URL(endpointUrl);
+		URLConnection connection = url.openConnection();
+		connection.setUseCaches(false);
+		connection.setAllowUserInteraction(false);
 
+		return connection;
+	}
+	
 	private URLConnection openConnection(String endpointUrl, String body) throws MalformedURLException, IOException {
 		URL url = new URL(endpointUrl);
 		URLConnection connection = url.openConnection();

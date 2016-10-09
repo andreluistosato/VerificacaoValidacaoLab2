@@ -10,4 +10,8 @@ public class Configuracao {
 		return "http://viacep.com.br/ws";
 	}
 	
+	public String getConsultaPrecoPrazoUrl() {
+		return "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx";
+	}
+	
 }
