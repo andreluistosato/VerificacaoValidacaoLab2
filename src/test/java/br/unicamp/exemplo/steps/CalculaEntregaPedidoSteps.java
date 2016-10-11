@@ -4,7 +4,6 @@ package br.unicamp.exemplo.steps;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.assertj.core.api.Assertions;
-import br.unicamp.exemplo.BuscaEndereco;
 import br.unicamp.exemplo.CalculaEntregaPedido;
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
