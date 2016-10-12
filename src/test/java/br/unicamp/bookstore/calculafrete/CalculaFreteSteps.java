@@ -1,4 +1,4 @@
-package br.unicamp.exemplo.steps;
+package br.unicamp.bookstore.calculafrete;
 
 
 import static org.junit.Assert.assertEquals;
@@ -7,14 +7,13 @@ import org.assertj.core.api.Assertions;
 
 import br.unicamp.bookstore.model.ProdutoFrete;
 import br.unicamp.bookstore.model.TipoEntregaEnum;
-import br.unicamp.exemplo.CalculaEntregaPedido;
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class CalculaEntregaPedidoSteps{
+public class CalculaFreteSteps{
 	
     private Throwable throwable;
     

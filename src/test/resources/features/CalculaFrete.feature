@@ -1,4 +1,4 @@
-Feature: CalculaEntregaPedido
+Feature: CalculaFrete
 	Como cliente
 	Desejo calcular o frete e o tempo de uma entrega a patir do
 	peso, largura, 

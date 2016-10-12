@@ -1,4 +1,4 @@
-package br.unicamp.exemplo.runner;
+package br.unicamp.bookstore.calculafrete;
 
 import org.junit.runner.RunWith;
 
@@ -9,8 +9,8 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
         plugin = { "pretty", "html:target/cucumber" },
         glue = "br.unicamp.exemplo.steps",
-        features = "classpath:features/CalculaEntregaPedido.feature"
+        features = "classpath:features/CalculaFrete.feature"
 )
-public class RunCalculaEntregaPedidoTest {
+public class RunCalculaFreteTest {
 }
 
