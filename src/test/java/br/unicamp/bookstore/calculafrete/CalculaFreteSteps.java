@@ -21,7 +21,7 @@ import org.assertj.core.api.Assertions;
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 import br.unicamp.bookstore.Configuracao;
-import br.unicamp.bookstore.model.ProdutoFrete;
+import br.unicamp.bookstore.model.Produto;
 import br.unicamp.bookstore.model.TipoEntregaEnum;
 import br.unicamp.bookstore.service.BuscaEnderecoService;
 import br.unicamp.bookstore.service.CalculaFreteService;
@@ -59,8 +59,19 @@ public class CalculaFreteSteps{
 	public void eu_informo_Peso_Largura_Altura_Comprimento_Cep_e_TipoEntrega(Integer peso, Integer largura, Integer altura, 
 			Integer comprimento, Integer cep, Integer tipoEntrega) throws Throwable {
 	    
-		ProdutoFrete produtoFrete = new ProdutoFrete(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(), 
-				comprimento.doubleValue(), cep, TipoEntregaEnum.getTipoEntregaEnum(tipoEntrega));
+		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(), comprimento.doubleValue());
+		
+		//cep, TipoEntregaEnum.getTipoEntregaEnum(tipoEntrega);
+		
+		
+		//TODO
+		
+		
+		
+//		Código Serviço
+//		40010 SEDEX Varejo
+//		40215 SEDEX 10 Varejo
+//		41106 PAC Varejo
 		
 	}
 	

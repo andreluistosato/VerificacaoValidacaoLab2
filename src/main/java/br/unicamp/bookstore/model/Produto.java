@@ -2,7 +2,7 @@ package br.unicamp.bookstore.model;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public class ProdutoFrete {
+public class Produto {
 	@XmlElement(name = "peso")
 	private double Peso;
 	
@@ -15,20 +15,17 @@ public class ProdutoFrete {
 	@XmlElement(name = "comprimento")
 	private double Comprimento;
 	
-	@XmlElement(name = "cep")
-	private int Cep;
+	//@XmlElement(name = "cep")
+	//private int Cep;
 	
-	@XmlElement(name = "tipoentrega")
-	private TipoEntregaEnum TipoEntrega;
+	//@XmlElement(name = "tipoentrega")
+	//private TipoEntregaEnum TipoEntrega;
 	
-	public ProdutoFrete(double peso, double largura, double altura, double comprimento, int cep,
-			TipoEntregaEnum tipoEntrega) {
+	public Produto(double peso, double largura, double altura, double comprimento) {
 		Peso = peso;
 		Largura = largura;
 		Altura = altura;
 		Comprimento = comprimento;
-		Cep = cep;
-		TipoEntrega = tipoEntrega;
 	}
 
 	public double getPeso() {
@@ -63,20 +60,4 @@ public class ProdutoFrete {
 		Comprimento = comprimento;
 	}
 
-	public int getCep() {
-		return Cep;
-	}
-
-	public void setCep(int cep) {
-		Cep = cep;
-	}
-
-	public TipoEntregaEnum getTipoEntrega() {
-		return TipoEntrega;
-	}
-
-	public void setTipoEntrega(Integer tipoEntrega) {		
-		TipoEntrega = TipoEntregaEnum.getTipoEntregaEnum(tipoEntrega);
-		
-	}
 }
