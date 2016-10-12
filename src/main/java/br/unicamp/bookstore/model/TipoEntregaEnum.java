@@ -1,19 +1,16 @@
 package br.unicamp.bookstore.model;
 
 public enum TipoEntregaEnum {
-	PAC,
-	SEDEX,
-	SEDEX10;
+	PACVAREJO("41106"),
+	SEDEXVAREJO("40010"),
+	SEDEX10VAREJO("40215");	
+	String codigo;
 	
-	public static TipoEntregaEnum getTipoEntregaEnum(int tipoEntrega) {
-		switch (tipoEntrega) {
-		default:
-		case 0:
-			return PAC;			
-		case 1:
-			return SEDEX;
-		case 2:
-			return SEDEX10;			
-		}
+	private TipoEntregaEnum(String codigo) {
+		this.codigo = codigo;
+	}
+	
+	public String getCodigo() {
+		return codigo;
 	}
 }

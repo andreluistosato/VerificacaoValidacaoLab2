@@ -1,25 +1,10 @@
 package br.unicamp.bookstore.model;
 
-import javax.xml.bind.annotation.XmlElement;
-
 public class Produto {
-	@XmlElement(name = "peso")
-	private double Peso;
-	
-	@XmlElement(name = "largura")
-	private double Largura;
-	
-	@XmlElement(name = "altura")
+	private double Peso;	
+	private double Largura;	
 	private double Altura;
-	
-	@XmlElement(name = "comprimento")
 	private double Comprimento;
-	
-	//@XmlElement(name = "cep")
-	//private int Cep;
-	
-	//@XmlElement(name = "tipoentrega")
-	//private TipoEntregaEnum TipoEntrega;
 	
 	public Produto(double peso, double largura, double altura, double comprimento) {
 		Peso = peso;
@@ -59,5 +44,14 @@ public class Produto {
 	public void setComprimento(double comprimento) {
 		Comprimento = comprimento;
 	}
+
+	//todo: fazer uma funcao toQueryString() que retorna um sprintf() para retornar o querystring.
+	@Override //Apagar essa porra
+	public String toString() {
+		return "Produto [nVlPeso=" + Peso + ", Largura=" + Largura + ", Altura=" + Altura + ", Comprimento=" + Comprimento
+				+ "]";
+	}
+	
+	
 
 }

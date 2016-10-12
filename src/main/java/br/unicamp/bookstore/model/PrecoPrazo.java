@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import javax.xml.bind.annotation.XmlElement;
 
 public class PrecoPrazo {
-
+	// TODO: Adicionar mais atributos e get and Set.
 	@XmlElement(name = "Valor")
 	private String Valor;
 	

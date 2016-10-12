@@ -47,10 +47,11 @@ public class CalculaFreteSteps{
     public void setUp() {
     	if (!wireMockServer.isRunning()) {
 			wireMockServer.start();
+			wireMockServer.resetToDefaultMappings();
 		}
 		MockitoAnnotations.initMocks(this);
 		Mockito.when(configuration.getConsultaPrecoPrazoUrl())
-				.thenReturn("http://localhost:8080/ws");
+				.thenReturn("http://localhost:8080/calculador/CalcPrecoPrazo.aspx");
     }
 
 	@Given("^Que eu possuo o uma calculadora de valor de frete e tempo$")
@@ -61,26 +62,23 @@ public class CalculaFreteSteps{
 	
 	@When("^Eu informo Peso {(\\d+)}, Largura {(\\d+)}, Altura {(\\d+)}, Comprimento {(\\d+)}, Cep {(\\d+)} e TipoEntrega {(\\d+)}$")
 	public void eu_informo_Peso_Largura_Altura_Comprimento_Cep_e_TipoEntrega(Integer peso, Integer largura, Integer altura, 
-			Integer comprimento, Integer cep, Integer tipoEntrega) throws Throwable {
+			Integer comprimento, String cep, String tipoEntrega) throws Throwable {
 		
-		wireMockServer.stubFor(get(urlMatching("/ws/.*"))
+		TipoEntregaEnum tipoEntregaEnum = TipoEntregaEnum.valueOf(tipoEntrega.trim().replace(" ", "").toUpperCase());
+	
+		
+		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(), comprimento.doubleValue());
+		
+		wireMockServer.stubFor(get(urlMatching(".*"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-consulta-prazo-entrega.xml")));
 		
-		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(), comprimento.doubleValue());
-		
 		//cep, TipoEntregaEnum.getTipoEntregaEnum(tipoEntrega);
 		
+		//TODO		
+		calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
 		
-		//TODO
-		
-		
-		
-//		Código Serviço
-//		40010 SEDEX Varejo
-//		40215 SEDEX 10 Varejo
-//		41106 PAC Varejo
 		
 	}
 	
