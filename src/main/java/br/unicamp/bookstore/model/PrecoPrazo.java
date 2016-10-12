@@ -7,18 +7,24 @@ import javax.xml.bind.annotation.XmlElement;
 public class PrecoPrazo {
 
 	@XmlElement(name = "Valor")
-	private String valor;
+	private String Valor;
 	
 	@XmlElement(name = "PrazoEntrega")
-	private Integer prazoEntrega;
+	private Integer PrazoEntrega;
+	
+	public PrecoPrazo(String valor, Integer prazoEntrega) {
+		this.Valor = valor;
+		this.PrazoEntrega = prazoEntrega;
+
+	}
 
 	public Integer getPrazoEntrega() {
-		return prazoEntrega;
+		return PrazoEntrega;
 	}
 	
 	public Double getValor() {
 		try {
-			return new DecimalFormat("##,##").parse(valor).doubleValue();
+			return new DecimalFormat("##,##").parse(Valor).doubleValue();
 		} catch (Exception e) {
 			return null;
 		}

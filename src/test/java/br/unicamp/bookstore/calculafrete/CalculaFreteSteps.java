@@ -45,8 +45,12 @@ public class CalculaFreteSteps{
     
     @Before
     public void setUp() {
-    
-    	throwable = null;
+    	if (!wireMockServer.isRunning()) {
+			wireMockServer.start();
+		}
+		MockitoAnnotations.initMocks(this);
+		Mockito.when(configuration.getConsultaPrecoPrazoUrl())
+				.thenReturn("http://localhost:8080/ws");
     }
 
 	@Given("^Que eu possuo o uma calculadora de valor de frete e tempo$")
@@ -58,7 +62,12 @@ public class CalculaFreteSteps{
 	@When("^Eu informo Peso {(\\d+)}, Largura {(\\d+)}, Altura {(\\d+)}, Comprimento {(\\d+)}, Cep {(\\d+)} e TipoEntrega {(\\d+)}$")
 	public void eu_informo_Peso_Largura_Altura_Comprimento_Cep_e_TipoEntrega(Integer peso, Integer largura, Integer altura, 
 			Integer comprimento, Integer cep, Integer tipoEntrega) throws Throwable {
-	    
+		
+		wireMockServer.stubFor(get(urlMatching("/ws/.*"))
+				.willReturn(aResponse().withStatus(200)
+						.withHeader("Content-Type", "text/xml")
+						.withBodyFile("resultado-consulta-prazo-entrega.xml")));
+		
 		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(), comprimento.doubleValue());
 		
 		//cep, TipoEntregaEnum.getTipoEntregaEnum(tipoEntrega);
