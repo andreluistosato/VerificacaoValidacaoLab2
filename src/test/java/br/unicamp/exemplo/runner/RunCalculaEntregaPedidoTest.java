@@ -9,7 +9,7 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
         plugin = { "pretty", "html:target/cucumber" },
         glue = "br.unicamp.exemplo.steps",
-        features = "classpath:features/BuscaEndereco.feature"
+        features = "classpath:features/CalculaEntregaPedido.feature"
 )
 public class RunCalculaEntregaPedidoTest {
 }
