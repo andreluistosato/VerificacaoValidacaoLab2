@@ -7,7 +7,7 @@ import br.unicamp.bookstore.model.ProdutoFrete;
 public class CalculaFreteService {
 	private Configuracao configuracao;
 	
-	public String buscar(ProdutoFrete produtoFrete) {
+	public String calculaFrete(ProdutoFrete produtoFrete) {
 		String url = String.format("%s/%s/xml", 
 				configuracao.getConsultaPrecoPrazoUrl(),
 				produtoFrete);
