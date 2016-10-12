@@ -27,6 +27,9 @@ public class Endereco {
 
 	@XmlElement(name = "gia")
 	private String gia;
+	
+	@XmlElement(name = "erro")
+	private String erro;
 
 	public String getCep() {
 		return cep;
@@ -58,6 +61,10 @@ public class Endereco {
 
 	public String getGia() {
 		return gia;
+	}
+	
+	public String getErro() {
+		return erro;
 	}
 
 }
