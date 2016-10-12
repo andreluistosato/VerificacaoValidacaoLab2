@@ -22,35 +22,22 @@ public class CalculaEntregaPedidoSteps{
     	throwable = null;
     }
     
-    @Given("^Eu possuo um Peso de (\\d+) quilos preenchido e valido$")
-    public void eu_possuo_um_Peso_de_quilos_preenchido_e_valido(int arg1) throws Throwable {
+    @Given("^Que eu possuo o uma calculadora de valor de frete e tempo$")
+    public void que_eu_possuo_o_uma_calculadora_de_valor_de_frete_e_tempo() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 
-    @Given("^Eu possuo uma Largura de (\\d+) metro preenchido e valido$")
-    public void eu_possuo_uma_Largura_de_metro_preenchido_e_valido(int arg1) throws Throwable {
+    @When("^Eu informo Peso {(\\d+)}, Largura {(\\d+)}, Altura {(\\d+)} e Comprimento {(\\d+)}$")
+    public void eu_informo_Peso_Largura_Altura_e_Comprimento(int arg1, int arg2, int arg3, int arg4) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 
-    @When("^Eu informo o Peso {(\\d+)}$")
-    public void eu_informo_o_Peso(int arg1) throws Throwable {
+    @Then("^eu recebo um Objeto contendo valor do Frete e o Tempo$")
+    public void eu_recebo_um_Objeto_contendo_valor_do_Frete_e_o_Tempo() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
-
-    @When("^Eu informo a Largura {(\\d+)}$")
-    public void eu_informo_a_Largura(int arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @Then("^O resultado deve ser TRUE$")
-    public void o_resultado_deve_ser_TRUE() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
 
 }
