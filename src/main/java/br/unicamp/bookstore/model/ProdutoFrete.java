@@ -1,16 +1,24 @@
 package br.unicamp.bookstore.model;
 
+import javax.xml.bind.annotation.XmlElement;
+
 public class ProdutoFrete {
+	@XmlElement(name = "peso")
 	private double Peso;
 	
+	@XmlElement(name = "largura")
 	private double Largura;
 	
+	@XmlElement(name = "altura")
 	private double Altura;
 	
+	@XmlElement(name = "comprimento")
 	private double Comprimento;
 	
+	@XmlElement(name = "cep")
 	private int Cep;
 	
+	@XmlElement(name = "tipoentrega")
 	private TipoEntregaEnum TipoEntrega;
 	
 	public ProdutoFrete(double peso, double largura, double altura, double comprimento, int cep,
