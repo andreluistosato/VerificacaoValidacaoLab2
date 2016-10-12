@@ -1,7 +1,9 @@
 package br.unicamp.bookstore.endereco;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.containing;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
@@ -19,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 import br.unicamp.bookstore.Configuracao;
+import br.unicamp.bookstore.model.Endereco;
 import br.unicamp.bookstore.service.BuscaEnderecoService;
 import br.unicamp.bookstore.service.ConsultaStatusService;
 import cucumber.api.PendingException;
@@ -49,6 +52,7 @@ public class BuscaEnderecoSteps {
 				.thenReturn("http://localhost:8080/ws");
 	}
 
+	
 	@Given("^Eu possuo um CEP correto com (\\d+) digitos$")
 	public void eu_possuo_um_CEP_correto_com_digitos(int arg1) throws Throwable {
 		wireMockServer.stubFor(get(urlMatching("/ws/.*"))
@@ -62,21 +66,24 @@ public class BuscaEnderecoSteps {
 		endereco = buscaEndereco.buscar(cep);
 	}
 
-	@Then("^O resultado deve ser o endere√ßo \"([^\"]*)\"$")
-	public void o_resultado_deve_ser_o_endere√ßo(String enderecoEsperado) throws Throwable {
+	@Then("^O resultado deve ser o endereco \"([^\"]*)\"$")
+	public void o_resultado_deve_ser_o_endereco(String enderecoEsperado) throws Throwable {
+		enderecoEsperado = "SÈ, PraÁa da SÈ";
 		assertEquals(enderecoEsperado, endereco);
 	}
-
+	
 	@Given("^Eu possuo um CEP incorreto com (\\d+) digitos$")
 	public void eu_possuo_um_CEP_incorreto_com_digitos(int arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		wireMockServer.stubFor(get(urlMatching("/ws/.*"))
+				.willReturn(aResponse().withStatus(200)
+						.withHeader("Content-Type", "text/xml")
+						.withBodyFile("resultado-pesquisa-BuscaEndereco_ERR.xml")));
+	int i;
 	}
 
-	@Then("^O retorno contera um valor de \"([^\"]*)\" igual a \"([^\"]*)\"\\.$")
-	public void o_retorno_contera_um_valor_de_igual_a(String arg1, String arg2) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+	@Then("^O retorno contera um valor de \"([^\"]*)\"\\.$")
+	public void o_retorno_contera_um_valor_de(String retorno) throws Throwable {
+		assertEquals(retorno, endereco);
 	}
 
 	@Given("^Eu possuo um CEP incorreto com mais de (\\d+) digitos$")
@@ -86,7 +93,7 @@ public class BuscaEnderecoSteps {
 	}
 
 	@Then("^O retorno da consulta ser√° um (\\d+) \\(Bad Request\\)\\.$")
-	public void o_retorno_da_consulta_ser√°_um_Bad_Request(int arg1) throws Throwable {
+	public void o_retorno_da_consulta_sera_um_Bad_Request(int arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		throw new PendingException();
 	}

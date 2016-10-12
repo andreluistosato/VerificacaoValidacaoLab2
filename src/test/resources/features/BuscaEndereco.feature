@@ -5,13 +5,13 @@ Feature: BuscaEndereco
 
 Scenario: Consultar um endereco valido 
 Given Eu possuo um CEP correto com 8 digitos 
-When Eu informo o CEP 13083872
-Then O resultado deve ser o endereço "Cidade Universitária Zeferino Vaz, Barão Geraldo - Campinas - SP"
+When Eu informo o CEP 01001000
+Then O resultado deve ser o endereco "Praca da Se" 
 
 Scenario: Consultar um endereco invalido 
 Given Eu possuo um CEP incorreto com 8 digitos 
 When Eu informo o CEP 99999999
-Then O retorno contera um valor de "erro: true".
+Then O retorno contera um valor de "erro=true".
 
 Scenario: Consultar um endereco com CEP invalido. 
 Given Eu possuo um CEP incorreto com mais de 8 digitos 
