@@ -68,7 +68,7 @@ public class BuscaEnderecoSteps {
 
 	@Then("^O resultado deve ser o endereco \"([^\"]*)\"$")
 	public void o_resultado_deve_ser_o_endereco(String enderecoEsperado) throws Throwable {
-		enderecoEsperado = "Sé, Praça da Sé";
+		enderecoEsperado = "Sï¿½, Praï¿½a da Sï¿½";
 		assertEquals(enderecoEsperado, endereco);
 	}
 	

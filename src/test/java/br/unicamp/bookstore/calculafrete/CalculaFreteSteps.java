@@ -1,12 +1,30 @@
 package br.unicamp.bookstore.calculafrete;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.containing;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.assertj.core.api.Assertions;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
+
+import br.unicamp.bookstore.Configuracao;
 import br.unicamp.bookstore.model.ProdutoFrete;
 import br.unicamp.bookstore.model.TipoEntregaEnum;
+import br.unicamp.bookstore.service.BuscaEnderecoService;
+import br.unicamp.bookstore.service.CalculaFreteService;
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -14,6 +32,14 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class CalculaFreteSteps{
+	
+	public static WireMockServer wireMockServer = new WireMockServer();
+	
+	@Mock
+	private Configuracao configuration;
+
+	@InjectMocks
+	private CalculaFreteService calculaFrete;
 	
     private Throwable throwable;
     
