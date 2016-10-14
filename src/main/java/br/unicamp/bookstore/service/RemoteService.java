@@ -12,13 +12,15 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class RemoteService {
 
-	public <T> T getAndParseXml(String endpointUrl, Class<T> xmlClass) {
+	public <T> T getAndParseXml(String endpointUrl, Class<T> xmlClass) throws IOException {
 		Document document = getAndParseXml(endpointUrl);
 		try {
 			Element root = document.getDocumentElement();
@@ -32,31 +34,25 @@ public class RemoteService {
 			return null;
 		}
 	}
-	
-	public Document getAndParseXml(String endpointUrl) {
-		try {
-			URLConnection connection = openConnection(endpointUrl);
-			return parseResponse(connection);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public Document postAndParseXml(String endpointUrl, String body) {
-		try {
-			URLConnection connection = openConnection(endpointUrl, body);
-			return parseResponse(connection);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+
+	public Document getAndParseXml(String endpointUrl) throws IOException {
+		URLConnection connection = openConnection(endpointUrl);
+		return parseResponse(connection);
 	}
 
-	private Document parseResponse(URLConnection connection) throws Exception {
+	public Document postAndParseXml(String endpointUrl, String body) throws IOException {
+		URLConnection connection = openConnection(endpointUrl, body);
+		return parseResponse(connection);
+	}
+
+	private Document parseResponse(URLConnection connection) throws IOException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		return builder.parse(connection.getInputStream());
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			return builder.parse(connection.getInputStream());
+		} catch (ParserConfigurationException | SAXException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private URLConnection openConnection(String endpointUrl) throws MalformedURLException, IOException {
@@ -67,7 +63,7 @@ public class RemoteService {
 
 		return connection;
 	}
-	
+
 	private URLConnection openConnection(String endpointUrl, String body) throws MalformedURLException, IOException {
 		URL url = new URL(endpointUrl);
 		URLConnection connection = url.openConnection();

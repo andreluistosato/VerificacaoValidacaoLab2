@@ -1,5 +1,7 @@
 package br.unicamp.bookstore.service;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -43,8 +45,15 @@ public class CalculaFreteService {
 				codigo);
 		
 		RemoteService remoteService = new RemoteService();
-		Document document = remoteService.getAndParseXml(url);
+		try {
+			Document document = remoteService.getAndParseXml(url);
+			return parseDocument(document);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
+	private PrecoPrazo parseDocument(Document document) {
 		try {
 			XPath xpath = XPathFactory.newInstance().newXPath();
 			XPathExpression expr = xpath.compile("//Servicos/cServico");
@@ -53,7 +62,6 @@ public class CalculaFreteService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 

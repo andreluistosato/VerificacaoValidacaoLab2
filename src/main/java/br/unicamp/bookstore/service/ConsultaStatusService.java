@@ -1,5 +1,7 @@
 package br.unicamp.bookstore.service;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -23,20 +25,26 @@ public class ConsultaStatusService {
 	public StatusEncomenda consultStatus(String codigo) {
 		String body = "usuario=ECT&senha=SRO&tipo=L&resultado=T&objetos=" + codigo;
 		String endpointUrl = configuracao.getStatusEntregaUrl();
-		Document document = new RemoteService().postAndParseXml(endpointUrl, body);
 
 		try {
-			XPath xpath = XPathFactory.newInstance().newXPath();
-  			XPathExpression expr = xpath.compile("/sroxml/objeto/evento[1]");
-			return parseItem((Node) expr.evaluate(document, XPathConstants.NODE));
+			Document document = new RemoteService().postAndParseXml(endpointUrl, body);
+			return parseDocument(document);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
+	private StatusEncomenda parseDocument(Document document) {
+		try {
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			XPathExpression expr = xpath.compile("/sroxml/objeto/evento[1]");
+			return parseItem((Node) expr.evaluate(document, XPathConstants.NODE));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
+
 	private StatusEncomenda parseItem(Node item) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(StatusEncomenda.class);
@@ -44,7 +52,7 @@ public class ConsultaStatusService {
 			JAXBElement<StatusEncomenda> loader = unmarshaller.unmarshal(item, StatusEncomenda.class);
 			return loader.getValue();
 		} catch (JAXBException e) {
-			 return null;
+			return null;
 		}
 	}
 
