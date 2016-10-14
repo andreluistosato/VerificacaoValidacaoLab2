@@ -40,9 +40,7 @@ public class BuscaEnderecoSteps {
 
 	@Before
 	public void setUp() {
-		if (!wireMockServer.isRunning()) {
-			wireMockServer.start();
-		}
+		wireMockServer.start();
 		MockitoAnnotations.initMocks(this);
 		Mockito.when(configuration.getBuscarEnderecoUrl())
 				.thenReturn("http://localhost:8080/ws");
@@ -73,7 +71,8 @@ public class BuscaEnderecoSteps {
 	}
 
 	@Then("^O resultado deve ser o endereco com o Logradouro: \"([^\"]*)\", Cidade: \"([^\"]*)\"$")
-	public void o_resultado_deve_ser_o_endereco_com_o_Logradouro_Cidade(String logradouro, String cidade) throws Throwable {
+	public void o_resultado_deve_ser_o_endereco_com_o_Logradouro_Cidade(String logradouro, String cidade)
+			throws Throwable {
 		assertEquals(endereco.getLogradouro(), logradouro);
 		assertEquals(endereco.getLocalidade(), cidade);
 		assertNull(throwable);

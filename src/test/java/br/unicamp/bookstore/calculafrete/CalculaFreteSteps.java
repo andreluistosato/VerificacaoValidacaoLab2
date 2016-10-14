@@ -36,9 +36,7 @@ public class CalculaFreteSteps {
 
 	@Before
 	public void setUp() {
-		if (!wireMockServer.isRunning()) {
-			wireMockServer.start();
-		}
+		wireMockServer.start();
 		MockitoAnnotations.initMocks(this);
 		Mockito.when(configuration.getConsultaPrecoPrazoUrl())
 				.thenReturn("http://localhost:8080/calculador/CalcPrecoPrazo.aspx");
