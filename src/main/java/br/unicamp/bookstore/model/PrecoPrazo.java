@@ -32,6 +32,17 @@ public class PrecoPrazo {
 	@XmlElement(name = "Erro")
 	private String Erro;
 	
+	@XmlElement(name = "MsgErro")
+	private String MsgErro;
+	
+	public String getMsgErro() {
+		return MsgErro;
+	}
+
+	public void setMsgErro(String msgErro) {
+		MsgErro = msgErro;
+	}
+
 	public Integer getCodigo() {
 		return Codigo;
 	}
