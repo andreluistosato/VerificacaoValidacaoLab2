@@ -52,13 +52,6 @@ public class PrecoPrazo {
 	}
 
 	public String getValor() {
-		/*
-		try {
-			return new DecimalFormat("##,##").parse(Valor).doubleValue();
-		} catch (Exception e) {
-			return null;
-		}
-		*/
 		return Valor;
 	}
 
@@ -120,11 +113,5 @@ public class PrecoPrazo {
 
 	public void setErro(String erro) {
 		Erro = erro;
-	}
-
-	public PrecoPrazo(String valor, Integer prazoEntrega) {
-		this.Valor = valor;
-		this.PrazoEntrega = prazoEntrega;
-
 	}
 }

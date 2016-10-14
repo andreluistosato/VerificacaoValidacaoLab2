@@ -8,7 +8,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = { "pretty", "html:target/cucumber" },
-        glue = "br.unicamp.exemplo.steps",
+        glue = "br.unicamp.bookstore.calculafrete",
         features = "classpath:features/CalculaFrete.feature"
 )
 public class RunCalculaFreteTest {
