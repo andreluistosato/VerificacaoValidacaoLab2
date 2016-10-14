@@ -14,12 +14,13 @@ import org.w3c.dom.Node;
 
 import br.unicamp.bookstore.Configuracao;
 import br.unicamp.bookstore.model.PrecoPrazo;
+import br.unicamp.bookstore.model.StatusEncomenda;
 
 public class ConsultaStatusService {
 
 	private Configuracao configuracao;
 
-	public String consultStatus(String codigo) {
+	public StatusEncomenda consultStatus(String codigo) {
 		String body = "usuario=ECT&senha=SRO&tipo=L&resultado=T&objetos=" + codigo;
 		String endpointUrl = configuracao.getStatusEntregaUrl();
 		Document document = new RemoteService().postAndParseXml(endpointUrl, body);
@@ -27,8 +28,8 @@ public class ConsultaStatusService {
 		try {
 			XPath xpath = XPathFactory.newInstance().newXPath();
   			XPathExpression expr = xpath.compile("/sroxml/objeto/evento[1]");
+			return parseItem((Node) expr.evaluate(document, XPathConstants.NODE));
 
-			return (String) expr.evaluate(document, XPathConstants.STRING);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
