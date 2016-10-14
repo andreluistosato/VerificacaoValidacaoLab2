@@ -16,12 +16,15 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import br.unicamp.bookstore.Configuracao;
+import br.unicamp.bookstore.dao.DadosDeEntregaDAO;
 import br.unicamp.bookstore.model.PrecoPrazo;
 import br.unicamp.bookstore.model.Produto;
 
 public class CalculaFreteService {
 
 	private Configuracao configuracao;
+	
+	private DadosDeEntregaDAO dadosDeEntregaDao;
 
 	public PrecoPrazo consultaPrecoPrazo(Produto produto, String cep, String codigo) {
 		
@@ -44,6 +47,12 @@ public class CalculaFreteService {
 				produto.toQueryString(),
 				codigo);
 		
+		PrecoPrazo frete = parseDocument(url);
+		dadosDeEntregaDao.saveDadosDeEntrega(frete.getValorFrete(), frete.getPrazoEntrega());
+		return frete;
+	}
+
+	private PrecoPrazo parseDocument(String url) {
 		RemoteService remoteService = new RemoteService();
 		try {
 			Document document = remoteService.getAndParseXml(url);

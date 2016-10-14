@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import br.unicamp.bookstore.Configuracao;
+import br.unicamp.bookstore.dao.DadosDeEntregaDAO;
 import br.unicamp.bookstore.model.PrecoPrazo;
 import br.unicamp.bookstore.model.Produto;
 import br.unicamp.bookstore.model.TipoEntregaEnum;
@@ -30,6 +31,9 @@ public class CalculaFreteSteps {
 	@Mock
 	private Configuracao configuration;
 
+	@Mock
+	private DadosDeEntregaDAO dadosDeEntregaDao;
+	
 	@InjectMocks
 	private CalculaFreteService calculaFrete;
 	private PrecoPrazo precoPrazo;
