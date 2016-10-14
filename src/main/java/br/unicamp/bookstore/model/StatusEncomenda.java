@@ -1,5 +1,6 @@
 package br.unicamp.bookstore.model;
 
+import javax.ws.rs.GET;
 import javax.xml.bind.annotation.XmlElement;
 
 public class StatusEncomenda {
@@ -36,14 +37,6 @@ public class StatusEncomenda {
 		public void setdescricao(String Descricao) {
 			descricao = Descricao;
 		}
-
-		
-	    if ((status.getTipo().equals("BDE") || status.getTipo().equals("BDI") || status.getTipo().equals("BDR")) && status.getStatus().equals("0))) { 
-	    return descricao;
-	    }else {
-	    //regra pra produto nao entrege
-	    return descricao;
-	    }
 	 }
 
 
