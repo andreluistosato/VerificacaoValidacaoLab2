@@ -104,8 +104,8 @@ public class CalculaFreteSteps {
 
 	@Then("^Eu recebo uma mensagem \"([^\"]*)\"$")
 	public void eu_recebo_uma_mensagem(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		assertEquals(precoPrazo.getMsgErro(), arg1);
+	    
 	}
 
 }
