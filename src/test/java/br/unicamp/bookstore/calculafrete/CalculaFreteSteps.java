@@ -54,17 +54,7 @@ public class CalculaFreteSteps {
 	@Given("^Que eu possuo o uma calculadora de valor de frete e tempo$")
 	public void que_eu_possuo_o_uma_calculadora_de_valor_de_frete_e_tempo() throws Throwable {
 		assertNotNull(calculaFrete);
-	}
-
-	@When("^Eu informo Peso (\\d+), Largura (\\d+), Altura (\\d+), Comprimento (\\d+), Cep \"([^\"]*)\" e tipoEntrega \"([^\"]*)\"$")
-	public void eu_informo_Peso_Largura_Altura_Comprimento_Cep_e_TipoEntrega(Integer peso, Integer largura,
-			Integer altura, Integer comprimento, String cep, String tipoEntrega) throws Throwable {
-
-		TipoEntregaEnum tipoEntregaEnum = TipoEntregaEnum.valueOf(tipoEntrega.trim().replace(" ", "").toUpperCase());
-
-		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(),
-				comprimento.doubleValue());
-
+		
 		// Sedex Varejo
 		wireMockServer.stubFor(get(urlMatching(".*"))
 				.withQueryParam("nCdServico", equalTo("40010"))
@@ -85,15 +75,37 @@ public class CalculaFreteSteps {
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-consulta-prazo-entrega-sedex-10-varejo.xml")));
+		
+	}
 
-		precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
+	@When("^Eu informo Peso (\\d+), Largura (\\d+), Altura (\\d+), Comprimento (\\d+), Cep \"([^\"]*)\" e tipoEntrega \"([^\"]*)\"$")
+	public void eu_informo_Peso_Largura_Altura_Comprimento_Cep_e_TipoEntrega(Integer peso, Integer largura,
+			Integer altura, Integer comprimento, String cep, String tipoEntrega) throws Throwable {
 
+		TipoEntregaEnum tipoEntregaEnum = TipoEntregaEnum.valueOf(tipoEntrega.trim().replace(" ", "").toUpperCase());
+
+		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(),
+				comprimento.doubleValue());
+
+		precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());		
+		
 	}
 
 	@Then("^Eu recebo um preco \"([^\"]*)\" e o prazo (\\d+)$")
 	public void eu_recebo_um_preco_e_o_prazo(String preco, int prazo) throws Throwable {
 		assertEquals(preco, precoPrazo.getValor());
 		assertEquals(prazo, precoPrazo.getPrazoEntrega().intValue());
+	}
+	
+	@When("^Eu informo um cep \"([^\"]*)\" invalido$")
+	public void eu_informo_um_cep_invalido(String cep) throws Throwable {		
+		
+	}
+
+	@Then("^Eu recebo uma mensagem \"([^\"]*)\"$")
+	public void eu_recebo_uma_mensagem(String arg1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
 	}
 
 }
