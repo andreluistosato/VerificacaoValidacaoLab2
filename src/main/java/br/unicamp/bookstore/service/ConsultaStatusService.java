@@ -26,7 +26,7 @@ public class ConsultaStatusService {
 
 		try {
 			XPath xpath = XPathFactory.newInstance().newXPath();
-  			XPathExpression expr = xpath.compile("/sroxml/objeto/evento[1]/tipo/status/descricao");
+  			XPathExpression expr = xpath.compile("/sroxml/objeto/evento[1]");
 
 			return (String) expr.evaluate(document, XPathConstants.STRING);
 		} catch (Exception e) {
