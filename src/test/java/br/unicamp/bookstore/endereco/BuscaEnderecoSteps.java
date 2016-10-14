@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 import br.unicamp.bookstore.Configuracao;
+import br.unicamp.bookstore.model.Endereco;
 import br.unicamp.bookstore.service.BuscaEnderecoService;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -33,8 +34,8 @@ public class BuscaEnderecoSteps {
 	@InjectMocks
 	private BuscaEnderecoService buscaEndereco;
 
-	private String endereco;
-	
+	private Endereco endereco;
+
 	private Throwable throwable;
 
 	@Before
@@ -71,9 +72,10 @@ public class BuscaEnderecoSteps {
 		}
 	}
 
-	@Then("^O resultado deve ser o endereco \"([^\"]*)\"$")
-	public void o_resultado_deve_ser_o_endereco(String enderecoEsperado) throws Throwable {
-		assertEquals(enderecoEsperado, endereco);
+	@Then("^O resultado deve ser o endereco com o Logradouro: \"([^\"]*)\", Cidade: \"([^\"]*)\"$")
+	public void o_resultado_deve_ser_o_endereco_com_o_Logradouro_Cidade(String logradouro, String cidade) throws Throwable {
+		assertEquals(endereco.getLogradouro(), logradouro);
+		assertEquals(endereco.getLocalidade(), cidade);
 		assertNull(throwable);
 	}
 
@@ -86,16 +88,17 @@ public class BuscaEnderecoSteps {
 
 	}
 
-	@Then("^O retorno contera um valor de \"([^\"]*)\"\\.$")
-	public void o_retorno_contera_um_valor_de(String retorno) throws Throwable {
-		assertEquals(retorno, endereco);
+	@Then("^O retorno contera um valor de erro igual a \"([^\"]*)\"\\.$")
+	public void o_retorno_contera_um_valor_de(String erro) throws Throwable {
+		assertEquals(endereco.getErro(), erro);
 		assertNull(throwable);
 	}
 
 	@Given("^Eu possuo um CEP incorreto com mais de (\\d+) digitos$")
 	public void eu_possuo_um_CEP_incorreto_com_mais_de_digitos(int cepIncorreto) throws Throwable {
 		wireMockServer.stubFor(get(urlEqualTo("/ws/" + cepIncorreto + "/xml/"))
-				.willReturn(aResponse().withStatus(400)));
+				.willReturn(aResponse().withStatus(400)
+						.withBodyFile("resultado-pesquisa-BuscaEndereco_BAD.xml")));
 
 	}
 

@@ -9,18 +9,13 @@ public class BuscaEnderecoService {
 
 	private Configuracao configuracao;
 
-	public String buscar(String cep) {
+	public Endereco buscar(String cep) {
 		String url = String.format("%s/%s/xml",
 				configuracao.getBuscarEnderecoUrl(),
 				cep);
 
 		try {
-			Endereco endereco = new RemoteService().getAndParseXml(url, Endereco.class);
-			String hasError = endereco.getErro();
-			if ((hasError != null) && (hasError.equals("true"))) {
-				return "erro=true";
-			}
-			return String.format("%s, %s", endereco.getLogradouro(), endereco.getLocalidade());
+			return new RemoteService().getAndParseXml(url, Endereco.class);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
