@@ -22,18 +22,26 @@ public class CalculaFreteService {
 	private Configuracao configuracao;
 
 	public PrecoPrazo consultaPrecoPrazo(Produto produto, String cep, String codigo) {
-		//Passar parametros na consulta
-		//http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?
-		//nCdEmpresa=09146920&sDsSenha=123456&sCepOrigem=70002900&sCepDestino=71939360&nVlPeso=1&nCdFormato=1&nVlComprimento=30&nVlAltura=30&nVlLargura=30&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=40010&nVlDiametro=0&StrRetorno=xml&nIndicaCalculo=3
+		
+		// http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?
 		String url = configuracao.getConsultaPrecoPrazoUrl();
-		url += "nCdEmpresa=bla";
+		url += String.format("?nCdEmpresa=09146920"
+				+ "&sDsSenha=123456"
+				+ "&sCepOrigem=70002900"
+				+ "&sCepDestino=%s"
+				+ "%s" // atributos do Produto
+				+ "&nCdFormato=1"
+				+ "&sCdMaoPropria=n"
+				+ "&nVlValorDeclarado=0"
+				+ "&sCdAvisoRecebimento=n"
+				+ "&nCdServico=%s"
+				+ "&nVlDiametro=0"
+				+ "&StrRetorno=xml"
+				+ "&nIndicaCalculo=3",
+				cep,
+				produto.toQueryString(),
+				codigo);
 		
-		
-		//url += produto.toQueryString();
-		//url += cep;
-		//url += codigo;
-		//todo: fazer o querystring general.(empresa, senha); 
-				
 		RemoteService remoteService = new RemoteService();
 		Document document = remoteService.getAndParseXml(url);
 

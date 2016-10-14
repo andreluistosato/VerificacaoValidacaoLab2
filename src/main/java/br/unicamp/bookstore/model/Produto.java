@@ -47,9 +47,8 @@ public class Produto {
 
 	//todo: fazer uma funcao toQueryString() que retorna um sprintf() para retornar o querystring.
 	@Override //Apagar essa porra
-	public String toString() {
-		return "Produto [nVlPeso=" + Peso + ", Largura=" + Largura + ", Altura=" + Altura + ", Comprimento=" + Comprimento
-				+ "]";
+	public String toQueryString() {
+		return String.format("&nVlPeso=%s&nVlComprimento=%s&nVlAltura=%s&nVlLargura=%s", args);
 	}
 	
 	
