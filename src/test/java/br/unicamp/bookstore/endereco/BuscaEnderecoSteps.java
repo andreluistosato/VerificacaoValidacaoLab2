@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.http.Fault;
 
 import br.unicamp.bookstore.Configuracao;
 import br.unicamp.bookstore.model.Endereco;
@@ -68,7 +69,7 @@ public class BuscaEnderecoSteps {
 
 	@Then("^O resultado deve ser o endereco \"([^\"]*)\"$")
 	public void o_resultado_deve_ser_o_endereco(String enderecoEsperado) throws Throwable {
-		enderecoEsperado = "S�, Pra�a da S�";
+		enderecoEsperado = "Rua Carlos Gomes, Campinas";
 		assertEquals(enderecoEsperado, endereco);
 	}
 	
@@ -78,7 +79,7 @@ public class BuscaEnderecoSteps {
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-pesquisa-BuscaEndereco_ERR.xml")));
-	int i;
+	
 	}
 
 	@Then("^O retorno contera um valor de \"([^\"]*)\"\\.$")
@@ -88,26 +89,16 @@ public class BuscaEnderecoSteps {
 
 	@Given("^Eu possuo um CEP incorreto com mais de (\\d+) digitos$")
 	public void eu_possuo_um_CEP_incorreto_com_mais_de_digitos(int arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		wireMockServer.stubFor(get(urlEqualTo("/ws/123456789/xml/"))
+				.willReturn(aResponse().withFault(Fault.EMPTY_RESPONSE)));
+		
 	}
 
-	@Then("^O retorno da consulta será um (\\d+) \\(Bad Request\\)\\.$")
-	public void o_retorno_da_consulta_sera_um_Bad_Request(int arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+	@Then("^O retorno da consulta sera um (\\d+) \\(Bad Request\\)\\.$")
+	public void o_retorno_da_consulta_sera_um_Bad_Request(String retorno) throws Throwable {
+		assertEquals(retorno, "400");
 	}
 
-	@Given("^Eu possuo um CEP incorreto com caracteres invalidos\\.$")
-	public void eu_possuo_um_CEP_incorreto_com_caracteres_invalidos() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
-	}
-
-	@When("^Eu informo o CEP (\\d+)A\\*n(\\d+)$")
-	public void eu_informo_o_CEP_A_n(int arg1, int arg2) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
-	}
+	
 
 }
