@@ -33,10 +33,14 @@ public class CalculaFreteSteps {
 
 	@Mock
 	private DadosDeEntregaDAO dadosDeEntregaDao;
-	
+
 	@InjectMocks
 	private CalculaFreteService calculaFrete;
 	private PrecoPrazo precoPrazo;
+
+	private TipoEntregaEnum tipoEntregaEnum;
+
+	private Produto produto;
 
 	@Before
 	public void setUp() {
@@ -51,12 +55,13 @@ public class CalculaFreteSteps {
 		wireMockServer.stop();
 	}
 
-	@Given("^Que eu possuo o uma calculadora de valor de frete e tempo$")
-	public void que_eu_possuo_o_uma_calculadora_de_valor_de_frete_e_tempo() throws Throwable {
+	@Given("^Que eu possuo uma calculadora de valor de frete e tempo$")
+	public void que_eu_possuo_uma_calculadora_de_valor_de_frete_e_tempo() throws Throwable {
 		assertNotNull(calculaFrete);
-		
+
 		// Sedex Varejo
 		wireMockServer.stubFor(get(urlMatching(".*"))
+				.atPriority(1)
 				.withQueryParam("nCdServico", equalTo("40010"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
@@ -64,6 +69,7 @@ public class CalculaFreteSteps {
 
 		// Pac Varejo
 		wireMockServer.stubFor(get(urlMatching(".*"))
+				.atPriority(1)
 				.withQueryParam("nCdServico", equalTo("41106"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
@@ -71,11 +77,17 @@ public class CalculaFreteSteps {
 
 		// Sedex 10 Varejo
 		wireMockServer.stubFor(get(urlMatching(".*"))
+				.atPriority(1)
 				.withQueryParam("nCdServico", equalTo("40215"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-consulta-prazo-entrega-sedex-10-varejo.xml")));
-		
+
+		// Cep invalido
+		wireMockServer.stubFor(get(urlMatching(".*"))
+				.willReturn(aResponse().withStatus(200)
+						.withHeader("Content-Type", "text/xml")
+						.withBodyFile("resultado-consulta-prazo-entrega-ERR.xml")));
 	}
 
 	@When("^Eu informo Peso (\\d+), Largura (\\d+), Altura (\\d+), Comprimento (\\d+), Cep \"([^\"]*)\" e tipoEntrega \"([^\"]*)\"$")
@@ -87,8 +99,8 @@ public class CalculaFreteSteps {
 		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(),
 				comprimento.doubleValue());
 
-		precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());		
-		
+		precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
+
 	}
 
 	@Then("^Eu recebo um preco \"([^\"]*)\" e o prazo (\\d+)$")
@@ -96,16 +108,25 @@ public class CalculaFreteSteps {
 		assertEquals(preco, precoPrazo.getValor());
 		assertEquals(prazo, precoPrazo.getPrazoEntrega().intValue());
 	}
-	
+
+	@When("^Eu informo Peso (\\d+), Largura (\\d+), Altura (\\d+), Comprimento (\\d+), e o tipoEntrega \"([^\"]*)\"$")
+	public void eu_informo_Peso_Largura_Altura_Comprimento_e_o_tipoEntrega(Integer peso, Integer altura,
+			Integer largura, Integer comprimento, String tipoEntrega) throws Throwable {
+		tipoEntregaEnum = TipoEntregaEnum.valueOf(tipoEntrega.trim().replace(" ", "").toUpperCase());
+
+		produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(),
+				comprimento.doubleValue());
+	}
+
 	@When("^Eu informo um cep \"([^\"]*)\" invalido$")
-	public void eu_informo_um_cep_invalido(String cep) throws Throwable {		
-		
+	public void eu_informo_um_cep_invalido(String cep) throws Throwable {
+		precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
 	}
 
 	@Then("^Eu recebo uma mensagem \"([^\"]*)\"$")
-	public void eu_recebo_uma_mensagem(String arg1) throws Throwable {
-		assertEquals(precoPrazo.getMsgErro(), arg1);
-	    
+	public void eu_recebo_uma_mensagem(String erro) throws Throwable {
+		assertEquals(precoPrazo.getMsgErro(), erro);
+
 	}
 
 }

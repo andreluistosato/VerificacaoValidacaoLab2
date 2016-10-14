@@ -17,5 +17,6 @@ Scenario Outline: Calcular Frete e Tempo com todos os campos preenchidos e valid
 
 Scenario: Calcular Frete e Tempo com os dados preenchidos e cep invalido
 	Given Que eu possuo uma calculadora de valor de frete e tempo
+	When Eu informo Peso 10, Largura 2, Altura 2, Comprimento 2, e o tipoEntrega "PACVAREJO"
 	When Eu informo um cep "123" invalido
 	Then Eu recebo uma mensagem "Serviço indisponível, tente mais tarde"

@@ -40,10 +40,6 @@ public class PrecoPrazo {
 		return MsgErro;
 	}
 
-	public void setMsgErro(String msgErro) {
-		MsgErro = msgErro;
-	}
-
 	public Integer getCodigo() {
 		return Codigo;
 	}
