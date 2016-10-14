@@ -1,43 +1,41 @@
 package br.unicamp.bookstore.model;
 
-import javax.ws.rs.GET;
 import javax.xml.bind.annotation.XmlElement;
 
 public class StatusEncomenda {
 
-	    @XmlElement(name = "tipo")
-	    private String tipo;
-	    
-	    @XmlElement(name = "status")
-	    private String status;
-	    
-	    @XmlElement(name = "descricao")
-	    private String descricao;
+	@XmlElement(name = "tipo")
+	private String tipo;
 
-	    public String getTipo() {
-			return tipo;
-		}
+	@XmlElement(name = "status")
+	private String status;
 
-		public void setTipo(String Tipo) {
-			tipo = Tipo;
-		}
-	    
-		public String getstatus() {
-			return status;
-		}
+	@XmlElement(name = "descricao")
+	private String descricao;
 
-		public void setStatus(String Status) {
-			status = Status;
-		}
-		
-		public String getdescricao() {
-			return descricao;
-		}
+	public String getTipo() {
+		return tipo;
+	}
 
-		public void setdescricao(String Descricao) {
-			descricao = Descricao;
-		}
-	 }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
 
-	 
+}

@@ -4,15 +4,10 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.containing;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import org.assertj.core.api.Assertions;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -50,7 +45,7 @@ public class ConsultarStatusSteps {
 		Mockito.when(configuration.getStatusEntregaUrl())
 				.thenReturn("http://localhost:8080/sro_bin/sroii_xml.eventos");
 	}
-	
+
 	@After
 	public void teardown() {
 		wireMockServer.stop();
@@ -71,10 +66,10 @@ public class ConsultarStatusSteps {
 		wireMockServer.verify(postRequestedFor(urlMatching("/sro_bin/sroii_xml.eventos"))
 				.withRequestBody(containing("objetos=" + codigo)));
 	}
-	
+
 	@Then("^O cliente recebera o status:\"([^\"]*)\"$")
 	public void o_cliente_recebera_o_status(String status) throws Throwable {
-		assertEquals(this.status.getdescricao(),status);
+		assertEquals(this.status.getDescricao(), status);
 	}
 
 	@When("^O cliente informar o <codigo> de rastreamento$")
@@ -87,13 +82,11 @@ public class ConsultarStatusSteps {
 
 	@Then("^O cliente recebera o codigo xx de erro$")
 	public void o_cliente_recebera_o_codigo_xx_de_erro() throws Throwable {
-	    }
+	}
 
 	@Then("^O cliente recebera o codigo de erro$")
 	public void o_cliente_recebera_o_codigo_de_erro() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+		// Write code here that turns the phrase above into concrete actions
 	}
-	
-	
-	
+
 }
