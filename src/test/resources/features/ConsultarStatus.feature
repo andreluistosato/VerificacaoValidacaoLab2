@@ -19,7 +19,7 @@ When O cliente informar o codigo "SA123" de rastreamento
 Then O cliente recebera o codigo de erro
 
 Scenario: O comprador consulta o status de entrega de sua compra porem o servico esta fora
-Given Eu possuo um codigo de rastreamento de uma compra efetuado no BookStore 
+Given Eu possuo um codigo de rastreamento de uma compra efetuado no BookStore , porem o servico esta fora
 When O cliente informar o codigo "SQ458226057BR" de rastreamento
 Then O cliente recebera o codigo de erro
 

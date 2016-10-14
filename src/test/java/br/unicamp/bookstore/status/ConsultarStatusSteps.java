@@ -82,9 +82,14 @@ public class ConsultarStatusSteps {
 	@Given("^Eu possuo um codigo invalido de rastreamento de uma compra efetuado no BookStore$")
 	public void eu_possuo_um_codigo_invalido_de_rastreamento_de_uma_compra_efetuado_no_BookStore() throws Throwable {
 		wireMockServer.stubFor(post(urlEqualTo("/sro_bin/sroii_xml.eventos"))
-				.willReturn(aResponse().withStatus(400)
-						.withHeader("Content-Type", "text/xml")));
+				.willReturn(aResponse().withStatus(400)));
 	}
+	
+	@Given("^Eu possuo um codigo de rastreamento de uma compra efetuado no BookStore , porem o servico esta fora$")
+	public void eu_possuo_um_codigo_de_rastreamento_de_uma_compra_efetuado_no_BookStore_porem_o_servico_esta_fora() throws Throwable {
+		//Sem mapeamento
+	}
+
 
 	@When("^O cliente informar o codigo \"([^\"]*)\" de rastreamento$")
 	public void o_cliente_informar_o_codigo_de_rastreamento(String codigo) throws Throwable {
