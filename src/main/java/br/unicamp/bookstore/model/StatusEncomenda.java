@@ -5,13 +5,13 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class StatusEncomenda {
 
-	    @XmlElement(name = "Tipo")
+	    @XmlElement(name = "tipo")
 	    private String tipo;
 	    
-	    @XmlElement(name = "Status")
+	    @XmlElement(name = "status")
 	    private String status;
 	    
-	    @XmlElement(name = "Descricao")
+	    @XmlElement(name = "descricao")
 	    private String descricao;
 
 	    public String getTipo() {

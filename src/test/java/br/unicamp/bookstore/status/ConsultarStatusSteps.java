@@ -66,11 +66,6 @@ public class ConsultarStatusSteps {
 		wireMockServer.verify(postRequestedFor(urlMatching("/sro_bin/sroii_xml.eventos"))
 				.withRequestBody(containing("objetos=" + codigo)));
 	}
-
-	@Then("^O cliente recebera o (\\d+) da entrega$")
-	public void o_cliente_recebera_o_status_da_entrega(String status) throws Throwable {
-		assertEquals(this.status, status);
-	}
 	
 	@When("^O cliente informar o <codigo> de rastreamento$")
 	public void o_cliente_informar_o_codigo_de_rastreamento() throws Throwable {
@@ -78,24 +73,22 @@ public class ConsultarStatusSteps {
 
 	@Then("^O cliente recebera o <status> da entrega$")
 	public void o_cliente_recebera_o_status_da_entrega() throws Throwable {
-
-	}@When("^O cliente informar o (\\d+) de rastreamento$")
-	public void o_cliente_informar_o_de_rastreamento(int arg1) throws Throwable {
-	    
 	}
-
-	@Then("^O cliente recebera o (\\d+) da entrega$")
-	public void o_cliente_recebera_o_da_entrega(int arg1) throws Throwable {
-	    }
 
 	@Then("^O cliente recebera o codigo xx de erro$")
 	public void o_cliente_recebera_o_codigo_xx_de_erro() throws Throwable {
 	    }
 
-	@Then("^O cliente recebera o <codigo> de erro$")
-	public void o_cliente_recebera_o_codigo_de_erro() throws Throwable {
-	    
+	@Then("^O cliente recebera o status:\"([^\"]*)\"$")
+	public void o_cliente_recebera_o_status(String status) throws Throwable {
+		assertEquals(this.status.getdescricao(),status);
 	}
 
+	@Then("^O cliente recebera o codigo de erro$")
+	public void o_cliente_recebera_o_codigo_de_erro() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	}
+	
+	
 	
 }
