@@ -22,6 +22,7 @@ import org.mockito.MockitoAnnotations;
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 import br.unicamp.bookstore.Configuracao;
+import br.unicamp.bookstore.model.StatusEncomenda;
 import br.unicamp.bookstore.service.ConsultaStatusService;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -38,7 +39,7 @@ public class ConsultarStatusSteps {
 	@InjectMocks
 	private ConsultaStatusService consultaStatusService;
 
-	private String status;
+	private StatusEncomenda status;
 
 	@Before
 	public void setup() {
@@ -70,4 +71,31 @@ public class ConsultarStatusSteps {
 	public void o_cliente_recebera_o_status_da_entrega(String status) throws Throwable {
 		assertEquals(this.status, status);
 	}
+	
+	@When("^O cliente informar o <codigo> de rastreamento$")
+	public void o_cliente_informar_o_codigo_de_rastreamento() throws Throwable {
+	}
+
+	@Then("^O cliente recebera o <status> da entrega$")
+	public void o_cliente_recebera_o_status_da_entrega() throws Throwable {
+
+	}@When("^O cliente informar o (\\d+) de rastreamento$")
+	public void o_cliente_informar_o_de_rastreamento(int arg1) throws Throwable {
+	    
+	}
+
+	@Then("^O cliente recebera o (\\d+) da entrega$")
+	public void o_cliente_recebera_o_da_entrega(int arg1) throws Throwable {
+	    }
+
+	@Then("^O cliente recebera o codigo xx de erro$")
+	public void o_cliente_recebera_o_codigo_xx_de_erro() throws Throwable {
+	    }
+
+	@Then("^O cliente recebera o <codigo> de erro$")
+	public void o_cliente_recebera_o_codigo_de_erro() throws Throwable {
+	    
+	}
+
+	
 }

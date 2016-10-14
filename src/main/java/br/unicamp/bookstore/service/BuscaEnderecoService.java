@@ -21,7 +21,11 @@ public class BuscaEnderecoService {
 				return "erro=true";
 			}
 		
-		return String.format("%s, %s", endereco.getBairro(), endereco.getLogradouro());
+		if (endereco.getLogradouro() == null){
+				return "400";
+		}
+		
+		return String.format("%s, %s", endereco.getLogradouro(), endereco.getLocalidade());
 		
 	}
 	
