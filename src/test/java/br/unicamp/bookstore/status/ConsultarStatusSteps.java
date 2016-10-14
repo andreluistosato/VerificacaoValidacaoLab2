@@ -43,9 +43,7 @@ public class ConsultarStatusSteps {
 
 	@Before
 	public void setUp() {
-		if (!wireMockServer.isRunning()) {
-			wireMockServer.start();
-		}
+		wireMockServer.start();
 		MockitoAnnotations.initMocks(this);
 		Mockito.when(configuration.getStatusEntregaUrl())
 				.thenReturn("http://localhost:8080/sro_bin/sroii_xml.eventos");
@@ -84,12 +82,12 @@ public class ConsultarStatusSteps {
 		wireMockServer.stubFor(post(urlEqualTo("/sro_bin/sroii_xml.eventos"))
 				.willReturn(aResponse().withStatus(400)));
 	}
-	
-	@Given("^Eu possuo um codigo de rastreamento de uma compra efetuado no BookStore , porem o servico esta fora$")
-	public void eu_possuo_um_codigo_de_rastreamento_de_uma_compra_efetuado_no_BookStore_porem_o_servico_esta_fora() throws Throwable {
-		//Sem mapeamento
-	}
 
+	@Given("^Eu possuo um codigo de rastreamento de uma compra efetuado no BookStore , porem o servico esta fora$")
+	public void eu_possuo_um_codigo_de_rastreamento_de_uma_compra_efetuado_no_BookStore_porem_o_servico_esta_fora()
+			throws Throwable {
+		// Sem mapeamento
+	}
 
 	@When("^O cliente informar o codigo \"([^\"]*)\" de rastreamento$")
 	public void o_cliente_informar_o_codigo_de_rastreamento(String codigo) throws Throwable {

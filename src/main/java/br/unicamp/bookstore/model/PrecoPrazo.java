@@ -1,40 +1,41 @@
 package br.unicamp.bookstore.model;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 
 import javax.xml.bind.annotation.XmlElement;
 
 public class PrecoPrazo {
 	@XmlElement(name = "Codigo")
 	private Integer Codigo;
-	
+
 	@XmlElement(name = "Valor")
 	private String Valor;
-	
+
 	@XmlElement(name = "PrazoEntrega")
 	private Integer PrazoEntrega;
-	
+
 	@XmlElement(name = "ValorMaoPropria")
 	private String ValorMaoPropria;
-	
+
 	@XmlElement(name = "ValorAvisoRecebimento")
 	private String ValorAvisoRecebimento;
-	
+
 	@XmlElement(name = "ValorValorDeclarado")
 	private String ValorValorDeclarado;
-	
+
 	@XmlElement(name = "EntregaDomiciliar")
 	private String EntregaDomiciliar;
-	
+
 	@XmlElement(name = "EntregaSabado")
 	private String EntregaSabado;
-	
+
 	@XmlElement(name = "Erro")
 	private String Erro;
-	
+
 	@XmlElement(name = "MsgErro")
 	private String MsgErro;
-	
+
 	public String getMsgErro() {
 		return MsgErro;
 	}
@@ -49,6 +50,14 @@ public class PrecoPrazo {
 
 	public void setCodigo(Integer codigo) {
 		Codigo = codigo;
+	}
+
+	public Double getValorFrete() {
+		try {
+			return new DecimalFormat("##,##").parse(Valor).doubleValue();
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 
 	public String getValor() {
