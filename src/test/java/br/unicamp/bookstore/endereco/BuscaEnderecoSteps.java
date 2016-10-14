@@ -10,9 +10,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,6 +23,7 @@ import br.unicamp.bookstore.model.Endereco;
 import br.unicamp.bookstore.service.BuscaEnderecoService;
 import br.unicamp.bookstore.service.ConsultaStatusService;
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -33,7 +31,7 @@ import cucumber.api.java.en.When;
 
 public class BuscaEnderecoSteps {
 
-	public static WireMockServer wireMockServer = new WireMockServer();
+	public WireMockServer wireMockServer = new WireMockServer();
 
 	@Mock
 	private Configuracao configuration;
@@ -44,7 +42,7 @@ public class BuscaEnderecoSteps {
 	private String endereco;
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		if (!wireMockServer.isRunning()) {
 			wireMockServer.start();
 		}
@@ -53,7 +51,11 @@ public class BuscaEnderecoSteps {
 				.thenReturn("http://localhost:8080/ws");
 	}
 
-	
+	@After
+	public void teardown() {
+		wireMockServer.stop();
+	}
+
 	@Given("^Eu possuo um CEP correto com (\\d+) digitos$")
 	public void eu_possuo_um_CEP_correto_com_digitos(int arg1) throws Throwable {
 		wireMockServer.stubFor(get(urlMatching("/ws/.*"))
@@ -72,14 +74,14 @@ public class BuscaEnderecoSteps {
 		enderecoEsperado = "Rua Carlos Gomes, Campinas";
 		assertEquals(enderecoEsperado, endereco);
 	}
-	
+
 	@Given("^Eu possuo um CEP incorreto com (\\d+) digitos$")
 	public void eu_possuo_um_CEP_incorreto_com_digitos(int arg1) throws Throwable {
 		wireMockServer.stubFor(get(urlMatching("/ws/.*"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-pesquisa-BuscaEndereco_ERR.xml")));
-	
+
 	}
 
 	@Then("^O retorno contera um valor de \"([^\"]*)\"\\.$")
@@ -91,14 +93,12 @@ public class BuscaEnderecoSteps {
 	public void eu_possuo_um_CEP_incorreto_com_mais_de_digitos(int arg1) throws Throwable {
 		wireMockServer.stubFor(get(urlEqualTo("/ws/123456789/xml/"))
 				.willReturn(aResponse().withFault(Fault.EMPTY_RESPONSE)));
-		
+
 	}
 
 	@Then("^O retorno da consulta sera um (\\d+) \\(Bad Request\\)\\.$")
 	public void o_retorno_da_consulta_sera_um_Bad_Request(String retorno) throws Throwable {
 		assertEquals(retorno, "400");
 	}
-
-	
 
 }
