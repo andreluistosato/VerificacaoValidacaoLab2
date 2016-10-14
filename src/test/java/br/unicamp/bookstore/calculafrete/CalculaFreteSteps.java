@@ -73,12 +73,8 @@ public class CalculaFreteSteps{
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-consulta-prazo-entrega.xml")));
-		
-		//cep, TipoEntregaEnum.getTipoEntregaEnum(tipoEntrega);
-		
-		//TODO		
+
 		calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
-		
 		
 	}
 	
