@@ -45,12 +45,8 @@ public class Produto {
 		Comprimento = comprimento;
 	}
 
-	//todo: fazer uma funcao toQueryString() que retorna um sprintf() para retornar o querystring.
-	@Override //Apagar essa porra
 	public String toQueryString() {
-		return String.format("&nVlPeso=%s&nVlComprimento=%s&nVlAltura=%s&nVlLargura=%s", args);
+		return String.format("&nVlPeso=%s&nVlComprimento=%s&nVlAltura=%s&nVlLargura=%s", Peso, Comprimento, Altura, Largura);
 	}
-	
-	
 
 }
