@@ -86,6 +86,13 @@ public class CalculaFreteSteps {
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-consulta-prazo-entrega-ERR.xml")));
+		
+		// Cep invalido
+		wireMockServer.stubFor(get(urlMatching(".*"))
+				.withQueryParam("sCepDestino", equalTo("123"))
+				.willReturn(aResponse().withStatus(200)
+						.withHeader("Content-Type", "text/xml")
+						.withBodyFile("resultado-consulta-prazo-entrega-ERR.xml")));
 	}
 
 	@When("^Eu informo Peso (\\d+), Largura (\\d+), Altura (\\d+), Comprimento (\\d+), Cep \"([^\"]*)\" e tipoEntrega \"([^\"]*)\"$")
