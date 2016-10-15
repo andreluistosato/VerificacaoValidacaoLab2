@@ -20,3 +20,10 @@ Scenario: Calcular Frete e Tempo com os dados preenchidos e cep invalido
 	When Eu informo Peso 10, Largura 2, Altura 2, Comprimento 2, e o tipoEntrega "PACVAREJO"
 	When Eu informo um cep "123" invalido
 	Then Eu recebo uma mensagem "Por favor corrija os dados de CEP"
+
+	
+Scenario: Calcular Frete e Tempo com os dados preenchidos e o servico esta indisponivel
+	Given Que eu possuo uma calculadora de valor de frete e tempo
+	When Eu informo Peso 10, Largura 2, Altura 2, Comprimento 2, Cep "12345123" e tipoEntrega "PACVAREJO"
+	Then Eu recebo uma mensagem de servico indisponivel "Serviço indisponível, tente mais tarde"
+	

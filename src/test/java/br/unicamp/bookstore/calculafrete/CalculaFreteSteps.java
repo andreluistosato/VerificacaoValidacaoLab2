@@ -23,6 +23,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import junit.framework.Assert;
 
 public class CalculaFreteSteps {
 
@@ -86,13 +87,6 @@ public class CalculaFreteSteps {
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-consulta-prazo-entrega-ERR.xml")));
-		
-		// Cep invalido
-		wireMockServer.stubFor(get(urlMatching(".*"))
-				.withQueryParam("sCepDestino", equalTo("123"))
-				.willReturn(aResponse().withStatus(200)
-						.withHeader("Content-Type", "text/xml")
-						.withBodyFile("resultado-consulta-prazo-entrega-ERR.xml")));
 	}
 
 	@When("^Eu informo Peso (\\d+), Largura (\\d+), Altura (\\d+), Comprimento (\\d+), Cep \"([^\"]*)\" e tipoEntrega \"([^\"]*)\"$")
@@ -121,17 +115,24 @@ public class CalculaFreteSteps {
 
 		produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(),
 				comprimento.doubleValue());
+		
 	}
 
 	@When("^Eu informo um cep \"([^\"]*)\" invalido$")
 	public void eu_informo_um_cep_invalido(String cep) throws Throwable {
-		precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
+		Produto product = new Produto(10,2,2,2);
+		precoPrazo = calculaFrete.consultaPrecoPrazo(product, cep, "40010");
 	}
-
+	
 	@Then("^Eu recebo uma mensagem \"([^\"]*)\"$")
 	public void eu_recebo_uma_mensagem(String erro) throws Throwable {
 		assertEquals(precoPrazo.getMsgErro(), erro);
-
+	}
+	
+	@Then("^Eu recebo uma mensagem de servico indisponivel \"([^\"]*)\"$")
+	public void eu_recebo_uma_mensagem_de_servico_indisponivel(String erro) throws Throwable {
+	    assertEquals("Serviço indisponível, tente mais tarde", erro);
+	
 	}
 
 }
