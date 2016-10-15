@@ -61,7 +61,6 @@ public class CalculaFreteSteps {
 
 		// Sedex Varejo
 		wireMockServer.stubFor(get(urlMatching(".*"))
-				.atPriority(1)
 				.withQueryParam("nCdServico", equalTo("40010"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
@@ -69,7 +68,6 @@ public class CalculaFreteSteps {
 
 		// Pac Varejo
 		wireMockServer.stubFor(get(urlMatching(".*"))
-				.atPriority(1)
 				.withQueryParam("nCdServico", equalTo("41106"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
@@ -77,7 +75,6 @@ public class CalculaFreteSteps {
 
 		// Sedex 10 Varejo
 		wireMockServer.stubFor(get(urlMatching(".*"))
-				.atPriority(1)
 				.withQueryParam("nCdServico", equalTo("40215"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
@@ -85,6 +82,7 @@ public class CalculaFreteSteps {
 
 		// Cep invalido
 		wireMockServer.stubFor(get(urlMatching(".*"))
+				.withQueryParam("sCepDestino", equalTo("123"))
 				.willReturn(aResponse().withStatus(200)
 						.withHeader("Content-Type", "text/xml")
 						.withBodyFile("resultado-consulta-prazo-entrega-ERR.xml")));
