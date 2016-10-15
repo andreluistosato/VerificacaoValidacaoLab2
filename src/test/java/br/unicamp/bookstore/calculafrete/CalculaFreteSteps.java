@@ -42,6 +42,8 @@ public class CalculaFreteSteps {
 	private TipoEntregaEnum tipoEntregaEnum;
 
 	private Produto produto;
+	
+	private Throwable throwable;
 
 	@Before
 	public void setUp() {
@@ -89,6 +91,12 @@ public class CalculaFreteSteps {
 						.withBodyFile("resultado-consulta-prazo-entrega-ERR.xml")));
 	}
 
+	@Given("^Que a calculadora de valor de frete e tempo esta indisponivel$")
+	public void que_a_calculadora_de_valor_de_frete_e_tempo_esta_indisponivel() throws Throwable {
+		wireMockServer.stubFor(get(urlMatching(".*"))
+				.willReturn(aResponse().withStatus(500)));
+	}
+	
 	@When("^Eu informo Peso (\\d+), Largura (\\d+), Altura (\\d+), Comprimento (\\d+), Cep \"([^\"]*)\" e tipoEntrega \"([^\"]*)\"$")
 	public void eu_informo_Peso_Largura_Altura_Comprimento_Cep_e_TipoEntrega(Integer peso, Integer largura,
 			Integer altura, Integer comprimento, String cep, String tipoEntrega) throws Throwable {
@@ -98,8 +106,11 @@ public class CalculaFreteSteps {
 		Produto produto = new Produto(peso.doubleValue(), largura.doubleValue(), altura.doubleValue(),
 				comprimento.doubleValue());
 
-		precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
-
+		try {
+			precoPrazo = calculaFrete.consultaPrecoPrazo(produto, cep, tipoEntregaEnum.getCodigo());
+		} catch (Exception e) {
+			throwable = e;
+		}
 	}
 
 	@Then("^Eu recebo um preco \"([^\"]*)\" e o prazo (\\d+)$")
@@ -129,10 +140,9 @@ public class CalculaFreteSteps {
 		assertEquals(precoPrazo.getMsgErro(), erro);
 	}
 	
-	@Then("^Eu recebo uma mensagem de servico indisponivel \"([^\"]*)\"$")
-	public void eu_recebo_uma_mensagem_de_servico_indisponivel(String erro) throws Throwable {
-	    assertEquals("Serviço indisponível, tente mais tarde", erro);
-	
+	@Then("^Eu recebo uma mensagem de erro$")
+	public void eu_recebo_uma_mensagem_de_servico_indisponivel() throws Throwable {
+	    assertNotNull(throwable);
 	}
 
 }
