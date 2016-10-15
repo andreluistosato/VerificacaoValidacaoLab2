@@ -7,116 +7,84 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class PrecoPrazo {
 	@XmlElement(name = "Codigo")
-	private Integer Codigo;
+	private Integer codigo;
 
 	@XmlElement(name = "Valor")
-	private String Valor;
+	private String valor;
 
 	@XmlElement(name = "PrazoEntrega")
-	private Integer PrazoEntrega;
+	private Integer prazoEntrega;
 
 	@XmlElement(name = "ValorMaoPropria")
-	private String ValorMaoPropria;
+	private String valorMaoPropria;
 
 	@XmlElement(name = "ValorAvisoRecebimento")
-	private String ValorAvisoRecebimento;
+	private String valorAvisoRecebimento;
 
 	@XmlElement(name = "ValorValorDeclarado")
-	private String ValorValorDeclarado;
+	private String valorValorDeclarado;
 
 	@XmlElement(name = "EntregaDomiciliar")
-	private String EntregaDomiciliar;
+	private String entregaDomiciliar;
 
 	@XmlElement(name = "EntregaSabado")
-	private String EntregaSabado;
+	private String entregaSabado;
 
 	@XmlElement(name = "Erro")
-	private String Erro;
+	private String erro;
 
 	@XmlElement(name = "MsgErro")
-	private String MsgErro;
+	private String msgErro;
 
 	public String getMsgErro() {
-		return MsgErro;
+		return msgErro;
 	}
 
 	public Integer getCodigo() {
-		return Codigo;
-	}
-
-	public void setCodigo(Integer codigo) {
-		Codigo = codigo;
+		return codigo;
 	}
 
 	public Double getValorFrete() {
 		try {
-			return new DecimalFormat("##,##").parse(Valor).doubleValue();
+			return new DecimalFormat("##,##").parse(valor).doubleValue();
 		} catch (ParseException e) {
 			return null;
 		}
 	}
 
 	public String getValor() {
-		return Valor;
-	}
-
-	public void setValor(String valor) {
-		Valor = valor;
+		return valor;
 	}
 
 	public Integer getPrazoEntrega() {
-		return PrazoEntrega;
-	}
-
-	public void setPrazoEntrega(Integer prazoEntrega) {
-		PrazoEntrega = prazoEntrega;
+		return prazoEntrega;
 	}
 
 	public String getValorMaoPropria() {
-		return ValorMaoPropria;
-	}
-
-	public void setValorMaoPropria(String valorMaoPropria) {
-		ValorMaoPropria = valorMaoPropria;
+		return valorMaoPropria;
 	}
 
 	public String getValorAvisoRecebimento() {
-		return ValorAvisoRecebimento;
-	}
-
-	public void setValorAvisoRecebimento(String valorAvisoRecebimento) {
-		ValorAvisoRecebimento = valorAvisoRecebimento;
+		return valorAvisoRecebimento;
 	}
 
 	public String getValorValorDeclarado() {
-		return ValorValorDeclarado;
-	}
-
-	public void setValorValorDeclarado(String valorValorDeclarado) {
-		ValorValorDeclarado = valorValorDeclarado;
+		return valorValorDeclarado;
 	}
 
 	public String getEntregaDomiciliar() {
-		return EntregaDomiciliar;
-	}
-
-	public void setEntregaDomiciliar(String entregaDomiciliar) {
-		EntregaDomiciliar = entregaDomiciliar;
+		return entregaDomiciliar;
 	}
 
 	public String getEntregaSabado() {
-		return EntregaSabado;
-	}
-
-	public void setEntregaSabado(String entregaSabado) {
-		EntregaSabado = entregaSabado;
+		return entregaSabado;
 	}
 
 	public String getErro() {
-		return Erro;
+		return erro;
 	}
 
-	public void setErro(String erro) {
-		Erro = erro;
+	public boolean hasError() {
+		return !"0".equals(erro);
 	}
 }

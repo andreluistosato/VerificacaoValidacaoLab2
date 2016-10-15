@@ -48,7 +48,9 @@ public class CalculaFreteService {
 				codigo);
 		
 		PrecoPrazo frete = parseDocument(url);
-		dadosDeEntregaDao.saveDadosDeEntrega(frete.getValorFrete(), frete.getPrazoEntrega());
+		if (!frete.hasError()) {
+			dadosDeEntregaDao.saveDadosDeEntrega(frete.getValorFrete(), frete.getPrazoEntrega());
+		}
 		return frete;
 	}
 
