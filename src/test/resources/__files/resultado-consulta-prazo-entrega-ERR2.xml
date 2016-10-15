@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <Servicos>
 	<cServico>
-		<Erro>-3</Erro>
-		<MsgErro>Por favor corrija os dados de CEP</MsgErro>
+		<Erro>7</Erro>
+		<MsgErro>Serviço indisponível, tente mais tarde</MsgErro>
 	</cServico>
 </Servicos>
